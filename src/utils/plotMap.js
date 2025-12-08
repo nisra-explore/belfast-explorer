@@ -227,10 +227,10 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
                     });
                 }
                 td_1.style = "text-align: right;";
-                // if (["all", "ni", lgd_code.toLowerCase()].includes(Object.keys(result.dimension[other_vars[i]].category.label)[j].toLowerCase())) {
-                //     td_0.style = "font-weight: bold;"
-                //     td_1.style = "text-align: right; font-weight: bold;"
-                // }
+                if (["all", "ni", lgd_code.toLowerCase()].includes(Object.keys(result.dimension[other_vars[i]].category.label)[j].toLowerCase())) {
+                    td_0.style = "font-weight: bold;"
+                    td_1.style = "text-align: right; font-weight: bold;"
+                }
                 tr.appendChild(td_1);
 
                 table.appendChild(tr);
@@ -352,9 +352,21 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
     var unit = result.dimension.STATISTIC.category.unit[statistic].label;
 
     let plot_ni = false;
+    let lgd_matrix; 
 
     if (geog_type == "none") {
         plot_ni = true;
+    } else if (geog_type == "DEA2014") {
+        if (matrix.indexOf("DEA") > -1) {
+            lgd_matrix = matrix.replace("DEA", "LGD");
+            if (Object.keys(tables).includes(lgd_matrix)) {
+                plot_ni = true;
+            }
+        } else if (matrix == "MYE01T010") {
+            lgd_matrix = "MYE01T04";
+            plot_ni = true;
+        }
+        
     } else {
         if (result.dimension[geog_type].category.index.includes(lgd_code) | themes_menu.value == "67") {
             plot_ni = true;
@@ -368,7 +380,7 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
         headline.classList.remove("d-none");
         headline.classList.add("d-block");
 
-        if (themes_menu.value != "67" & geog_type != "none") {
+        if (geog_type != "none") {
             const NI_position = result.dimension[geog_type].category.index.indexOf(lgd_code);
             result.value.splice(NI_position, 1);
             result.dimension[geog_type].category.index.splice(NI_position, 1);
@@ -383,25 +395,14 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
 
         let categories = Object.keys(tables[matrix].categories);
 
-        if (themes_menu.value == "67") {
-            if (categories.includes("NI")) {
-                ni_url = "https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=%7B%22jsonrpc%22:%222.0%22,%22method%22:%22PxStat.Data.Cube_API.ReadDataset%22,%22params%22:%7B%22class%22:%22query%22,%22id%22:%5B%5D,%22dimension%22:%7B%7D,%22extension%22:%7B%22pivot%22:null,%22codes%22:false,%22language%22:%7B%22code%22:%22en%22%7D,%22format%22:%7B%22type%22:%22JSON-stat%22,%22version%22:%222.0%22%7D,%22matrix%22:%22" + matrix + "%22%7D,%22version%22:%222.0%22%7D%7D";
-            } else if (matrix == "INDEXSALELGD") {
-                ni_url = "https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=%7B%22jsonrpc%22:%222.0%22,%22method%22:%22PxStat.Data.Cube_API.ReadDataset%22,%22params%22:%7B%22class%22:%22query%22,%22id%22:%5B%5D,%22dimension%22:%7B%7D,%22extension%22:%7B%22pivot%22:null,%22codes%22:false,%22language%22:%7B%22code%22:%22en%22%7D,%22format%22:%7B%22type%22:%22JSON-stat%22,%22version%22:%222.0%22%7D,%22matrix%22:%22INDEXSALENI%22%7D,%22version%22:%222.0%22%7D%7D";
-            } else {
-                let eq_matrix = matrix;
-                 if (geog_type == "LGD2014") {
-                    eq_matrix = matrix.replace("LGD", "EQ");
-                } else if (geog_type == "AA") {
-                    eq_matrix = matrix.replace("AA", "EQ");
-                }
+        if (geog_type == "DEA2014") {
 
-                ni_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' + 
-                    encodeURIComponent('{"jsonrpc": "2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query","id": ["EQUALGROUPS"],"dimension": {"EQUALGROUPS": {"category": {"index": ["' +
-                        lgd_code + 
-                        '"]}}},"extension": {"pivot": null,"codes": false,"language": {"code": "en"},"format": {"type": "JSON-stat","version": "2.0"},"matrix": "' +
-                        eq_matrix + '"},"version": "2.0"}}')
-                }
+            ni_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' + 
+                encodeURIComponent('{"jsonrpc": "2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query","id": ' + id_vars.replace("DEA2014", "LGD2014") + ',"dimension": {"LGD2014": {"category": {"index": ["' +
+                    lgd_code + 
+                    '"]}}' + other_selections + '},"extension": {"pivot": null,"codes": false,"language": {"code": "en"},"format": {"type": "JSON-stat","version": "2.0"},"matrix": "' +
+                    lgd_matrix + '"},"version": "2.0"}}')
+                
 
         } else if (geog_type == "none") {
 
@@ -424,7 +425,7 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
 
         const ni_response = await fetch(ni_url);
         const ni_result = await ni_response.json();
-        
+        console.log(ni_result);
         var data_series = ni_result.result.value;
         // Make sure values are numbers
         const values = data_series.map(v => (v === null || v === undefined ? null : Number(v)));
@@ -725,28 +726,28 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
 
         let map_title_text = `${stat_label} by ${result.dimension[geog_type].label} (${year})`;
         map_title.textContent = map_title_text;
-
         
         map_container.classList.add("d-block");
         map_container.appendChild(map_div);
 
-        let initialZoom = window.innerWidth < 768 ? 6 : 7; 
-        let bounds = [[-9.20, 53.58], [-4.53, 55.72]];
+        let initialZoom = window.innerWidth < 768 ? 9 : 10; 
 
         if (geog_type == "COB_BASIC") {
             initialZoom = 1;
             bounds = null;
         }
 
+        const bb = await getLGDBoundsAndCenter(lgd_code);
+
         // Create a map
        const map = new maplibregl.Map({
             container: 'map',
             style: 'public/map/style-omt.json',
-            center: [-6.85, 54.67],
+            center: bb.center,
             zoom: initialZoom,
-            minZoom: initialZoom,
+            minZoom: initialZoom - 6,
             maxZoom: initialZoom + 7,
-            maxBounds: bounds,
+            maxBounds: bb.bounds,
             attributionControl: false
         });         
         
@@ -773,7 +774,21 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
             // Assumes these are already in scope: geojsonData, geog_type, result, year, unit,
             // data (array of values), colours (0..1 or bins), getColour(), GEOG_PROPS, titleCase()
 
-            const features = geojsonData.features.map((f, idx) => {
+                const features = geojsonData.features
+                // 1) If DEA2014, only keep features in the chosen LGD
+                .filter(f => {
+                    if (geog_type !== "DEA2014") return true;
+
+                    const fLgd = String(f.properties.LGDCode ?? "")
+                    .replace(/\s+/g, "")
+                    .toUpperCase();
+
+                    const wanted = String(lgd_code ?? "")
+                    .replace(/\s+/g, "")
+                    .toUpperCase();
+
+                    return fLgd === wanted;
+                }).map((f, idx) => {
                 // Match your Leaflet logic to find this feature’s index in the data array
                 const codeProp = GEOG_PROPS[geog_type].code_var;
                 const code = String(f.properties[codeProp]).replace(/\s+/g, "");
@@ -1033,4 +1048,45 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
          metadata_text.innerHTML = note_cleaned;   
    
 
+}
+
+async function getLGDBoundsAndCenter(lgd_code) {
+  const res = await fetch("public/map/LGD2014.geo.json");
+  const lgdGeo = await res.json();
+
+  const wanted = String(lgd_code).replace(/\s+/g, "").toUpperCase();
+
+  const feature = lgdGeo.features.find(f => {
+    const fCode = String(f.properties.LGDCode ?? "")
+      .replace(/\s+/g, "")
+      .toUpperCase();
+    return fCode === wanted;
+  });
+
+  if (!feature) {
+    console.warn("No LGD feature found for code:", lgd_code);
+    return null;
+  }
+
+  // Walk all coordinates (works for Polygon/MultiPolygon)
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+  const walk = coords => {
+    if (typeof coords[0] === "number") {
+      const [x, y] = coords;
+      if (x < minX) minX = x - 0.5;
+      if (y < minY) minY = y;
+      if (x > maxX) maxX = x + 0.5;
+      if (y > maxY) maxY = y;
+      return;
+    }
+    coords.forEach(walk);
+  };
+
+  walk(feature.geometry.coordinates);
+
+  const bounds = [[minX, minY], [maxX, maxY]];
+  const center = [(minX + maxX) / 2, (minY + maxY) / 2];
+
+  return { bounds, center };
 }

@@ -141,7 +141,7 @@ for (i in seq_along(data_portal$label)) {
   
   if (theme$theme %in% c("Wellbeing framework", "Making life better")) next
   
-  if (!"LGD2014" %in% names(json_data$dimension)) next
+  if (!any(c("LGD2014", "DEA2014") %in% names(json_data$dimension))) next
 
   tables$tables[[matrix]] <- list(
     name = name,
@@ -173,7 +173,7 @@ for (i in seq_along(data_portal$label)) {
 
       if (associated_theme$theme %in% c("Wellbeing framework", "Making life better")) next
       
-      if (!"LGD2014" %in% names(json_data$dimension)) next
+      if (!any(c("LGD2014", "DEA2014") %in% names(json_data$dimension))) next
 
       tables$tables[[paste0(matrix, "_", j)]] <- list(
         name = name,
@@ -198,6 +198,7 @@ for (i in seq_along(data_portal$label)) {
 }
 
 tables$tables <- tables$tables[order(names(tables$tables))]
+tables$table_count <- length(tables$tables)
 
 write_json(tables,
            "public/data/data-portal-tables.json",
