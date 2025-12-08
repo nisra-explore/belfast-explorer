@@ -58,7 +58,6 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
         other_headline = " for ";
         additional_tables.classList.remove("d-none");
 
-
         for (let i = 0; i < other_vars.length; i ++) {
             
             id_vars += `, "${other_vars[i]}"`;
@@ -168,19 +167,35 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
             
             table_selections = table_selections.filter(x => x.indexOf(other_vars[i]) == -1)
             table_selections = table_selections.join(",");
-            if (geog_type != "none") table_selections += `,"${geog_type}":{"category":{"index":["${lgd_code}"]}}`;
+
+            let table_geog_type = geog_type;
+            let table_matrix = matrix;
+            let table_id_vars = id_vars;
+            if (geog_type == "DEA2014") {
+                if (matrix.indexOf("DEA") > -1) {
+                    table_geog_type = "LGD2014";
+                    table_matrix = matrix.replace("DEA", "LGD");
+                    table_id_vars = table_id_vars.replace("DEA2014", "LGD2014");
+                } else if (matrix == "MYE01T010") {
+                    table_geog_type = "LGD2014";
+                    table_matrix = "MYE01T04";
+                    table_id_vars = table_id_vars.replace("DEA2014", "LGD2014");
+                }
+            }
+
+            if (table_geog_type == "LGD2014") table_selections += `,"${table_geog_type}":{"category":{"index":["${lgd_code}"]}}`;
 
             let table_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
                 encodeURIComponent('{"jsonrpc":"2.0","method":"PxStat.Data.Cube_API.ReadDataset","params":{"class":"query","id":' +
-                    id_vars + '],"dimension":{"STATISTIC":{"category":{"index":["' +
+                    table_id_vars + '],"dimension":{"STATISTIC":{"category":{"index":["' +
                     statistic + '"]}},"' + time_var + '":{"category":{"index":["' + year +
                     '"]}}' + table_selections +
                     '},"extension":{"pivot":null,"codes":false,"language":{"code":"en"},"format":{"type":"JSON-stat","version":"2.0"},"matrix":"' +
-                    matrix + '"},"version":"2.0"}}');
+                    table_matrix + '"},"version":"2.0"}}');
 
             const response = await fetch(table_url);
             const { result } = await response.json();
-            
+
             let table_div = document.createElement("div");
             table_div.classList.add("table-responsive");
 
@@ -227,10 +242,10 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
                     });
                 }
                 td_1.style = "text-align: right;";
-                if (["all", "ni", lgd_code.toLowerCase()].includes(Object.keys(result.dimension[other_vars[i]].category.label)[j].toLowerCase())) {
-                    td_0.style = "font-weight: bold;"
-                    td_1.style = "text-align: right; font-weight: bold;"
-                }
+                // if (["all", "ni", lgd_code.toLowerCase()].includes(Object.keys(result.dimension[other_vars[i]].category.label)[j].toLowerCase())) {
+                //     td_0.style = "font-weight: bold;"
+                //     td_1.style = "text-align: right; font-weight: bold;"
+                // }
                 tr.appendChild(td_1);
 
                 table.appendChild(tr);
@@ -425,7 +440,7 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
 
         const ni_response = await fetch(ni_url);
         const ni_result = await ni_response.json();
-        console.log(ni_result);
+        
         var data_series = ni_result.result.value;
         // Make sure values are numbers
         const values = data_series.map(v => (v === null || v === undefined ? null : Number(v)));
@@ -541,6 +556,7 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
 
         headline_fig.innerHTML = `<span class = "h1">${headline_value}</span> ${unit_fixed}`;
         headline_stat.innerHTML = `<strong>${stat_label}</strong> in ${lgd_name} in <strong>${time_series[time_series.length - 1]}</strong>${other_headline}.`
+
 
         if (additional_tables.classList.contains("d-none")) {
 
@@ -939,7 +955,7 @@ export async function plotMap (tables, matrix, statistic, geog_type) {
         }
 
         table_title.textContent = `${result.label}`;
-        page_title.textContent += ` - ${result.label}`;
+        page_title.textContent = `${lgd_name} Data Explorer - ${result.label}`;
 
         nav_theme.textContent = tables[geo_menu.value].theme;        
         nav_subject.textContent = tables[geo_menu.value].subject;    

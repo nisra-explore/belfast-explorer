@@ -19,4 +19,4 @@ dea2 <- dea %>%
 # sanity check
 dea2 %>% select(DEA, DEA_code, LGDCode) %>% head()
 
-st_write(dea2, "public/map/DEA2014.geo.json", driver = "GeoJSON", append = TRUE)
+st_write(dea2, "public/map/DEA2014_with_LGD.geo.json", driver = "GeoJSON")

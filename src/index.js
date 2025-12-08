@@ -3,8 +3,11 @@ import { wireSearch } from "./utils/wireSearch.js";
 import { initSidebarPersistence } from "./utils/initSideBarPersistence.js";
 import { share_btn } from "./utils/elements.js";
 import { sharePage } from "./utils/sharePage.js";
+import { updateTitle } from "./utils/updateTitles.js";
 
 let searchIndex = [];
+
+updateTitle();
 
 window.addEventListener("DOMContentLoaded", async () => {
   try {
