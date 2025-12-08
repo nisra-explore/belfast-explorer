@@ -1,6 +1,9 @@
 // Default data to show on page load
 export const default_table = "MYE01T04";
 
+export const lgd_code = "N09000003"; // Belfast
+export const lgd_name = "Belfast";
+
 // Lookup for geojson files
 export const GEOG_PROPS= {
   LGD2014: { 
