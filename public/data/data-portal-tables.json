@@ -1,5 +1,5 @@
 {
-  "table_count": 1118,
+  "table_count": 1140,
   "tables": {
     "ABI01": {
       "name": "Annual Business Inquiry: results by industry sector",
@@ -157441,7 +157441,7 @@
     },
     "QCE01": {
       "name": "Quarterly Construction Index",
-      "updated": "2026-06-25",
+      "updated": "2026-08-10",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -157582,7 +157582,7 @@
     },
     "QEJOBS01": {
       "name": "Quarterly Employee Jobs by Industry",
-      "updated": "2026-07-24",
+      "updated": "2026-08-10",
       "categories": {
         "STATISTIC": {
           "category": {
