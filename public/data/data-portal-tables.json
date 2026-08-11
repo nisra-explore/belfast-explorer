@@ -57238,7 +57238,7 @@
     },
     "GHGEMSSNS": {
       "name": "Greenhouse gas emissions",
-      "updated": "2026-06-11",
+      "updated": "2026-08-11",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -157721,8 +157721,8 @@
       "rows": 425
     },
     "QEJOBS02": {
-      "name": "Quarterly Employee Jobs by Industry, Gender and Working Pattern",
-      "updated": "2026-07-24",
+      "name": "Quarterly Employee Jobs by Industry, Male/Female and Working Pattern",
+      "updated": "2026-08-11",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -157894,7 +157894,7 @@
           },
           "label": "Industry headline"
         },
-        "GENWP": {
+        "MFWP": {
           "category": {
             "index": ["FFT", "FPT", "MFT", "MPT", "All"],
             "label": {
@@ -157905,7 +157905,7 @@
               "All": "All"
             }
           },
-          "label": "Gender and working pattern"
+          "label": "Male/female and working pattern"
         }
       },
       "statistics": {
