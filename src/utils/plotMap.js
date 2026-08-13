@@ -76,7 +76,7 @@ export async function plotMap (tables, geog_type) {
 
         headline_stat_label.innerHTML = `
             ${stat_label}
-            <img class="i-button" src="assets/img/icon/i-button.svg" alt="Information button"
+            <img class="i-button" src="assets/img/icon/info-circle.svg" alt="Information button"
                 data-bs-toggle="collapse" data-bs-target="#stat-info" aria-expanded="false"
                 aria-controls="stat-info">
         `;
