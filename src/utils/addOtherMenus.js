@@ -117,6 +117,8 @@ export function addOtherMenus (tables, matrix, geog_type, time_var, search) {
         }
 
         map_subtitle.innerHTML = subtitle_text;
+    } else {
+        map_subtitle.innerHTML = "";
     }
     
     id_vars += `]`;   
