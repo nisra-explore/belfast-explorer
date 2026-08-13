@@ -218,7 +218,7 @@ main:focus-visible {
 .footer a:hover,
 .footer a:focus {
   color: #fff;
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 3px;
 }
 .footer-links { list-style: none; padding-left: 0; }
 .footer-links .list-inline-item { margin: 0 .5rem; }
@@ -258,16 +258,16 @@ table tr:not(:has(th)):hover {
 }
 
 .btn-primary {
-  background-color: var(--nisra_green);
-  border-color: var(--nisra_green);
-  color: #000
+  background-color: var(--nisra_purple);
+  border-color: var(--nisra_purple);
+  color: #fff
 }
 
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background-color: #4d7d17;
-  border-color: #4d7d17;
+  background-color: #5c636a;
+  border-color: #5c636a;
 }
 
 .sidebar-header {
@@ -366,3 +366,15 @@ a.cookiesbarlink {
   background-color: var(--nisra_blue);
 }
 
+.bg-green {
+  background-color: var(--nisra_green);
+}
+
+.h-16px {
+  height: 16px;
+}
+
+a:hover,
+a:focus {
+  text-decoration-thickness: 3px;
+}
