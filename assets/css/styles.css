@@ -271,7 +271,8 @@ table tr:not(:has(th)):hover {
 }
 
 .sidebar-header {
-  background-color: var(--nisra_green);
+  background-color: var(--nisra_blue);
+  color: #fff;
   font-weight: normal;
   display: flex;
   align-items: center;
