@@ -460,7 +460,7 @@ export async function plotMap (tables, geog_type) {
         
         const updated_text = `${result.updated.substr(8, 2)}/${result.updated.substr(5, 2)}/${result.updated.substr(0, 4)}`;
         
-        table_updated.innerHTML = updated_text;
+        table_updated.innerHTML = `<strong>Data last updated:</strong> ${updated_text}`;
 
         dataPortalPreview(tables, matrix, data, result, stat_label, geog_type, year, unit, time_series);       
 

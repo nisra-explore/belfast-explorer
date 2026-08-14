@@ -137,7 +137,7 @@ export async function chartDownload (capture_id, matrix, subject_code, product_c
 
     // ===== ADD THE DOWNLOAD MENU =====
     footerContent.innerHTML = `
-        <strong>Data last updated:</strong> ${update_date}.
+        <span class="text-secondary"><strong>Data last updated:</strong> ${update_date}</span>
         <div>
             <button class="btn btn-secondary dropdown-toggle btn-primary mt-2" type="button" id="${capture_id}-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 Download
