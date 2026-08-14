@@ -6,7 +6,7 @@ import { quantile} from "./quantile.js";
 import { themes_menu, map_container, stats_menu,
          page_title, getSearch, geo_menu,
          map_card, chart_updated, nav_product, nav_subject, nav_theme,
-         table_title, map_updated, map_title, headline_stat_label,
+         table_title, map_title, headline_stat_label,
          additional_tables, table_updated, stat_info_text, headline_year,
          headline_stat, chart_card, headline_fig } from "./elements.js";     
 import { downloadButton } from "./download-button.js";
@@ -15,6 +15,7 @@ import { buildTables } from "./buildTables.js";
 import { addOtherMenus, id_vars, other_selections, other_headline,
          other_vars, subtitle_text } from "./addOtherMenus.js";
 import { dataPortalPreview } from "./dataPortalPreview.js";
+import { chartDownload } from "./chart-download.js";
 
 export let map;
 
@@ -45,8 +46,6 @@ export async function plotMap (tables, geog_type) {
 
     const response = await fetch(api_url);
     const {result} = await response.json();
-
-    
 
     const stat_label = Object.values(result.dimension.STATISTIC.category.label)[0];
     const unit = result.dimension.STATISTIC.category.unit[statistic].label;
@@ -459,13 +458,53 @@ export async function plotMap (tables, geog_type) {
         nav_subject.textContent = tables[geo_menu.value].subject;    
         nav_product.textContent = tables[geo_menu.value].product;
         
-        const updated_text = `Last updated: <strong>${result.updated.substr(8, 2)}/${result.updated.substr(5, 2)}/${result.updated.substr(0, 4)}</strong>. See this full dataset on <a href = "https://data.nisra.gov.uk/table/${matrix}" target = "_blank">NISRA Data Portal.</a>`;
+        const updated_text = `${result.updated.substr(8, 2)}/${result.updated.substr(5, 2)}/${result.updated.substr(0, 4)}`;
         
-        chart_updated.innerHTML = updated_text;
         table_updated.innerHTML = updated_text;
-        map_updated.innerHTML = updated_text;
 
         dataPortalPreview(tables, matrix, data, result, stat_label, geog_type, year, unit, time_series);       
 
+        // Handle download button at top of page
         downloadButton(matrix);
+
+        // Download button for map
+        let map_query = {
+            "STATISTIC": statistic,
+            [time_var]: year
+        };
+
+        let chart_query = {
+            "STATISTIC": statistic,
+            [geog_type]: "N92000002",
+            [time_var]: time_series
+        };
+
+        const other_selections_parsed = JSON.parse(`{${other_selections.replace(/^,/, '')}}`);
+
+        other_vars.forEach(v => {
+            map_query[v] = other_selections_parsed[v].category.index;
+            chart_query[v] = other_selections_parsed[v].category.index;
+        });
+
+        chartDownload(
+            "map-capture",
+            matrix,
+            tables[geo_menu.value].subject_code,
+            tables[geo_menu.value].product_code,
+            map_query,
+            "map",
+            updated_text
+        );
+
+        // Download button for chart
+        chartDownload(
+            "chart-capture",
+            matrix,
+            tables[geo_menu.value].subject_code,
+            tables[geo_menu.value].product_code,
+            chart_query,
+            "chart",
+            updated_text
+        );
+
 }
