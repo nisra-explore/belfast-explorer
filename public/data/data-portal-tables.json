@@ -26688,7 +26688,7 @@
     },
     "CHSACTIONLGD": {
       "name": "Continuous Household Survey: Actions taken for a positive impact on the environment",
-      "updated": "2025-08-19",
+      "updated": "2026-08-19",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -26756,12 +26756,13 @@
         },
         "TLIST(A1)": {
           "category": {
-            "index": ["2021/22", "2022/23", "2023/24", "2024/25"],
+            "index": ["2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
             "label": {
               "2021/22": "2021/22",
               "2022/23": "2022/23",
               "2023/24": "2023/24",
-              "2024/25": "2024/25"
+              "2024/25": "2024/25",
+              "2025/26": "2025/26"
             }
           },
           "label": "Financial Year"
@@ -26807,18 +26808,18 @@
         "NONE": "None"
       },
       "time": "TLIST(A1)",
-      "time_series": ["2021/22", "2022/23", "2023/24", "2024/25"],
+      "time_series": ["2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
       "theme": "Transport, environment and climate change",
       "theme_code": 71,
       "subject": "Energy, environment and climate change",
       "subject_code": 155,
       "product": "Public attitudes",
       "product_code": "EECPA",
-      "rows": 432
+      "rows": 540
     },
     "CHSBIODIVLGD": {
       "name": "Continuous Household Survey: Considered greatest threat to biodiversity",
-      "updated": "2025-08-19",
+      "updated": "2026-08-19",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -26862,12 +26863,13 @@
         },
         "TLIST(A1)": {
           "category": {
-            "index": ["2021/22", "2022/23", "2023/24", "2024/25"],
+            "index": ["2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
             "label": {
               "2021/22": "2021/22",
               "2022/23": "2022/23",
               "2023/24": "2023/24",
-              "2024/25": "2024/25"
+              "2024/25": "2024/25",
+              "2025/26": "2025/26"
             }
           },
           "label": "Financial Year"
@@ -26901,18 +26903,18 @@
         "OTHER": "Other"
       },
       "time": "TLIST(A1)",
-      "time_series": ["2021/22", "2022/23", "2023/24", "2024/25"],
+      "time_series": ["2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
       "theme": "Transport, environment and climate change",
       "theme_code": 71,
       "subject": "Energy, environment and climate change",
       "subject_code": 155,
       "product": "Public attitudes",
       "product_code": "EECPA",
-      "rows": 240
+      "rows": 300
     },
     "CHSCONCERNLGD": {
       "name": "Continuous Household Survey: Concern about the environment",
-      "updated": "2025-08-19",
+      "updated": "2026-08-19",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -26938,12 +26940,13 @@
         },
         "TLIST(A1)": {
           "category": {
-            "index": ["2021/22", "2022/23", "2023/24", "2024/25"],
+            "index": ["2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
             "label": {
               "2021/22": "2021/22",
               "2022/23": "2022/23",
               "2023/24": "2023/24",
-              "2024/25": "2024/25"
+              "2024/25": "2024/25",
+              "2025/26": "2025/26"
             }
           },
           "label": "Financial Year"
@@ -26982,14 +26985,14 @@
         "NOTCONCERNENVI": "Households not concerned for Environment"
       },
       "time": "TLIST(A1)",
-      "time_series": ["2021/22", "2022/23", "2023/24", "2024/25"],
+      "time_series": ["2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
       "theme": "Transport, environment and climate change",
       "theme_code": 71,
       "subject": "Energy, environment and climate change",
       "subject_code": 155,
       "product": "Public attitudes",
       "product_code": "EECPA",
-      "rows": 96
+      "rows": 120
     },
     "CHSCONLGD": {
       "name": "Continuous Household Survey: Concern about the environment",
@@ -27565,7 +27568,7 @@
     },
     "CHSENVPROBLEMSLGD": {
       "name": "Continuous Household Survey: Environmental problems considered most important",
-      "updated": "2025-08-19",
+      "updated": "2026-08-19",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -27621,12 +27624,13 @@
         },
         "TLIST(A1)": {
           "category": {
-            "index": ["2021/22", "2022/23", "2023/24", "2024/25"],
+            "index": ["2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
             "label": {
               "2021/22": "2021/22",
               "2022/23": "2022/23",
               "2023/24": "2023/24",
-              "2024/25": "2024/25"
+              "2024/25": "2024/25",
+              "2025/26": "2025/26"
             }
           },
           "label": "Financial Year"
@@ -27670,14 +27674,14 @@
         "NONE": "None of these"
       },
       "time": "TLIST(A1)",
-      "time_series": ["2021/22", "2022/23", "2023/24", "2024/25"],
+      "time_series": ["2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
       "theme": "Transport, environment and climate change",
       "theme_code": 71,
       "subject": "Energy, environment and climate change",
       "subject_code": 155,
       "product": "Public attitudes",
       "product_code": "EECPA",
-      "rows": 336
+      "rows": 420
     },
     "CHSPOSIMPLGD": {
       "name": "Continuous Household Survey: Actions taken for a positive impact on the environment",
