@@ -53,6 +53,11 @@ export const GEOG_PROPS= {
     code_var: "Ward_Code",
     label: "Ward"
   },
+  WARD2014:{ 
+    url: "public/map/Ward2014.geo.json",
+    code_var: "Ward_Code",
+    label: "Ward"
+  },
   SOA:     {
     url: "public/map/SOA2011.geo.json",
     code_var: "SOA_CODE",

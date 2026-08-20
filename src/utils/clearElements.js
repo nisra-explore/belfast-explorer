@@ -1,5 +1,3 @@
-import { map } from "./plotMap.js";
-
 import {
     table_tabs,
     table_tabs_content,

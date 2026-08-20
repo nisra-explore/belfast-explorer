@@ -5,9 +5,9 @@ import { getColour } from "./getColour.js";
 import { quantile} from "./quantile.js";
 import { themes_menu, map_container, stats_menu,
          page_title, getSearch, geo_menu,
-         map_card, chart_updated, nav_product, nav_subject, nav_theme,
+         map_card, nav_product, nav_subject, nav_theme,
          table_title, map_title, headline_stat_label,
-         additional_tables, table_updated, stat_info_text, headline_year,
+         table_updated, stat_info_text, headline_year,
          headline_stat, chart_card, headline_fig } from "./elements.js";     
 import { downloadButton } from "./download-button.js";
 import { buildCharts } from "./buildCharts.js";

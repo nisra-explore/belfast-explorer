@@ -1,8 +1,7 @@
 import { wrapLabel } from "./wrapLabel.js";
 import { yAxisLabelPlugin } from "./yAxisLabelPlugin.js";
 import { chart_container, chart_card, chart_title, chart_subtitle,
-         headline_fig, headline_stat, headline_year, additional_tables, 
-         tables_title, table_tabs_content, table_updated, stats_menu, 
+         headline_fig, headline_stat, headline_year,
          themes_menu } from "./elements.js";
 
 export let ni_result;
