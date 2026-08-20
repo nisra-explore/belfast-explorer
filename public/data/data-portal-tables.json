@@ -48541,7 +48541,7 @@
     },
     "FARMSIZEEQ": {
       "name": "Farm size",
-      "updated": "2026-07-22",
+      "updated": "2026-08-20",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -111349,7 +111349,7 @@
     },
     "LANDDESEQ": {
       "name": "Main farmers by land designation",
-      "updated": "2026-07-22",
+      "updated": "2026-08-20",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -162492,7 +162492,7 @@
     },
     "RURALPOPEQ": {
       "name": "Usual resident population - Rural",
-      "updated": "2026-07-22",
+      "updated": "2026-08-20",
       "categories": {
         "STATISTIC": {
           "category": {
