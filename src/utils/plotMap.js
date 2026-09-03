@@ -1,4 +1,4 @@
-import { palette, GEOG_PROPS } from "../config/config.js";
+import { palette, GEOG_PROPS, lgd_code, lgd_name } from "../config/config.js";
 import { loadShapes } from "./loadShapes.js";
 import { titleCase } from "./titleCase.js";
 import { getColour } from "./getColour.js";
@@ -56,7 +56,7 @@ export async function plotMap (tables, geog_type) {
     if (geog_type == "none") {
         plot_ni = true;
     } else {
-        if (result.dimension[geog_type].category.index.includes("N92000002") || themes_menu.value == "67") {
+        if (result.dimension[geog_type].category.index.includes(lgd_code) || themes_menu.value == "67") {
             plot_ni = true;
         }
     }    
@@ -478,7 +478,7 @@ export async function plotMap (tables, geog_type) {
 
         let chart_query = {
             "STATISTIC": statistic,
-            [geog_type]: "N92000002",
+            [geog_type]: lgd_code,
             [time_var]: time_series
         };
 

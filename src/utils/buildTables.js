@@ -2,6 +2,7 @@ import { additional_tables, table_tabs, table_tabs_content, tables_title,
          stats_menu, chart_title } from "./elements.js";
 
 import { ni_result } from "./buildCharts.js";
+import { lgd_name, lgd_code } from "../config/config.js";
 
 export async function buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit) {
 
@@ -11,7 +12,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
         additional_tables.classList.remove("d-none");
 
          // Add new tables
-         tables_title.textContent = `${tables[matrix].statistics[stats_menu.value]} in Northern Ireland (${year}) by:`;
+         tables_title.textContent = `${tables[matrix].statistics[stats_menu.value]} in ${lgd_name} (${year}) by:`;
 
         for (let i = 0; i < other_vars.length; i ++) {   
 
@@ -40,7 +41,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
             let table_selections = other_selections.split(",");
             table_selections = table_selections.filter(x => x.indexOf(other_vars[i]) == -1)
             table_selections = table_selections.join(",");
-            if (geog_type != "none") table_selections += `,"${geog_type}":{"category":{"index":["N92000002"]}}`;
+            if (geog_type != "none") table_selections += `,"${geog_type}":{"category":{"index":["${lgd_code}"]}}`;
 
             let table_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
                 encodeURIComponent('{"jsonrpc":"2.0","method":"PxStat.Data.Cube_API.ReadDataset","params":{"class":"query","id":' +
@@ -102,7 +103,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
                     });
                 }
                 td_1.style = "text-align: right;"
-                if (["all", "ni", "n92000002"].includes(Object.keys(result.dimension[other_vars[i]].category.label)[j].toLowerCase())) {
+                if (["all", "ni", lgd_code.toLowerCase()].includes(Object.keys(result.dimension[other_vars[i]].category.label)[j].toLowerCase())) {
                     td_0.style = "font-weight: bold;"
                     td_1.style = "text-align: right; font-weight: bold;"
                 }
@@ -126,7 +127,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
 
             additional_tables.classList.remove("d-none");
 
-            tables_title.textContent = `${tables[matrix].name} - Northern Ireland Summary (${year})`;
+            tables_title.textContent = `${tables[matrix].name} - ${lgd_name} Summary (${year})`;
 
             let div = document.createElement("div");
             div.classList.add("tab-pane");
@@ -137,7 +138,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
             div.id = `table-tab-statistic`;
 
             let table_selections = "";
-            if (geog_type != "none") table_selections += `,"${geog_type}":{"category":{"index":["N92000002"]}}`;
+            if (geog_type != "none") table_selections += `,"${geog_type}":{"category":{"index":["${lgd_code}"]}}`;
 
             
 
@@ -169,7 +170,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
 
 
             let stat_header = document.createElement("th");
-            stat_header.textContent = `Northern Ireland`;
+            stat_header.textContent = lgd_name;
             stat_header.style = "text-align: right;"
             tr.appendChild(stat_header);
 
@@ -199,7 +200,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
                     });
                 }
                 td_1.style = "text-align: right;"
-                if (["all", "ni", "n92000002"].includes(Object.keys(result.dimension.STATISTIC.category.label)[j].toLowerCase())) {
+                if (["all", "ni", lgd_code.toLowerCase()].includes(Object.keys(result.dimension.STATISTIC.category.label)[j].toLowerCase())) {
                     td_0.style = "font-weight: bold;"
                     td_1.style = "text-align: right; font-weight: bold;"
                 }
@@ -236,7 +237,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
             tr.appendChild(var_header);
 
             let stat_header = document.createElement("th");
-            stat_header.textContent = `Northern Ireland (${yAxisTitle})`;
+            stat_header.textContent = `${lgd_name} (${yAxisTitle})`;
             stat_header.style = "text-align: right;"
             tr.appendChild(stat_header);
 

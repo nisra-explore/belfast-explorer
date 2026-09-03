@@ -2,6 +2,7 @@ import { additional_tables, other_menu,
          map_subtitle, SIDEBAR_OPEN_KEY,
          geo_menu, stats_menu, map_card, chart_card } from "./elements.js";
 import { refreshRoute } from "./refreshRoute.js";
+import { lgd_code } from "../config/config.js";
 
 export let id_vars;
 export let other_selections = "";
@@ -27,11 +28,11 @@ export function addOtherMenus (tables, matrix, geog_type, time_var, search) {
     other_vars = Object.keys(tables[matrix].categories)
         .filter(x => !normal_vars.includes(x));
 
-    if (["none", "NI"].includes(geog_type)) {
+    if (["none", "NI", "LGD2014"].includes(geog_type)) {
         map_card.classList.add("d-none");
         chart_card.classList.remove("col-xl-6");
         
-        id_vars = `["STATISTIC", "${time_var}"`;
+        id_vars = `["STATISTIC", "LGD2014", "${time_var}"`;
 
     } else {
 
@@ -70,7 +71,7 @@ export function addOtherMenus (tables, matrix, geog_type, time_var, search) {
             
             let selected_option = options[0];
 
-            const other_defaults = ["All", "ALL", "N92000002"];
+            const other_defaults = ["All", "ALL", lgd_code];
             
             for (let j = 0; j < other_defaults.length; j ++) {
                 if (options.includes(other_defaults[j])) {

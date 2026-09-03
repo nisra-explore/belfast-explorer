@@ -3,6 +3,7 @@ import { yAxisLabelPlugin } from "./yAxisLabelPlugin.js";
 import { chart_container, chart_card, chart_title, chart_subtitle,
          headline_fig, headline_stat, headline_year,
          themes_menu } from "./elements.js";
+import { lgd_code } from "../config/config.js";
 
 export let ni_result;
 
@@ -18,10 +19,10 @@ export async function buildCharts(tables, matrix, statistic, geog_type, result, 
         chart_card.classList.add("d-block");
 
         if (themes_menu.value != "67" && geog_type != "none") {
-            const NI_position = result.dimension[geog_type].category.index.indexOf("N92000002");
+            const NI_position = result.dimension[geog_type].category.index.indexOf(lgd_code);
             result.value.splice(NI_position, 1);
             result.dimension[geog_type].category.index.splice(NI_position, 1);
-            delete result.dimension[geog_type].category.label["N92000002"];
+            delete result.dimension[geog_type].category.label[lgd_code];
         }
 
         while (chart_container.firstChild) {
@@ -46,7 +47,7 @@ export async function buildCharts(tables, matrix, statistic, geog_type, result, 
                 }
 
                 ni_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
-                    encodeURIComponent('{"jsonrpc": "2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query","id": ["EQUALGROUPS"],"dimension": {"EQUALGROUPS": {"category": {"index": ["N92000002"]}}},"extension": {"pivot": null,"codes": false,"language": {"code": "en"},"format": {"type": "JSON-stat","version": "2.0"},"matrix": "' +
+                    encodeURIComponent('{"jsonrpc": "2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query","id": ["EQUALGROUPS"],"dimension": {"EQUALGROUPS": {"category": {"index": ["' + lgd_code + '"]}}},"extension": {"pivot": null,"codes": false,"language": {"code": "en"},"format": {"type": "JSON-stat","version": "2.0"},"matrix": "' +
                         eq_matrix + '"},"version": "2.0"}}')
             }
 
@@ -62,7 +63,7 @@ export async function buildCharts(tables, matrix, statistic, geog_type, result, 
             ni_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
                 encodeURIComponent('{"jsonrpc": "2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query", "id": ' + id_vars + ', "dimension": { "STATISTIC": {"category": {"index": ["' + statistic +
                     '"]}}, "' + geog_type +
-                    '": {"category": {"index": ["N92000002"]}}' + other_selections + '},"extension": {"pivot": null,"codes": false,"language": {"code":"en"},"format":{"type": "JSON-stat","version": "2.0"},"matrix": "' +
+                    '": {"category": {"index": ["' + lgd_code + '"]}}' + other_selections + '},"extension": {"pivot": null,"codes": false,"language": {"code":"en"},"format":{"type": "JSON-stat","version": "2.0"},"matrix": "' +
                     matrix + '"},"version": "2.0"}}');
         }
 
@@ -158,9 +159,9 @@ export async function buildCharts(tables, matrix, statistic, geog_type, result, 
 
 
         if (time_series.length == 1) {
-            chart_title.textContent = `${stat_label} in Northern Ireland ${time_series[0]}`;
+            chart_title.textContent = `${stat_label} in ${lgd_name} ${time_series[0]}`;
         } else {
-            chart_title.textContent = `${stat_label} in Northern Ireland (${time_series[0]} to ${time_series[time_series.length - 1]})`;
+            chart_title.textContent = `${stat_label} in ${lgd_name} (${time_series[0]} to ${time_series[time_series.length - 1]})`;
         }
 
         chart_subtitle.innerHTML = subtitle_text;

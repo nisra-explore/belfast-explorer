@@ -164,6 +164,8 @@ for (i in seq_along(data_portal$label)) {
     )
   ) next
 
+  if (!"LGD2014" %in% names(json_data$dimension)) next
+
   tables$tables[[matrix]] <- list(
     name = name,
     updated = as.Date(substr(data_portal$updated[i], 1, 10)),
@@ -198,6 +200,8 @@ for (i in seq_along(data_portal$label)) {
           "Wellbeing framework", "Making life better", "Themed datasets"
         )
       ) next
+
+      if (!"LGD2014" %in% names(json_data$dimension)) next
 
       tables$tables[[paste0(matrix, "_", j)]] <- list(
         name = name,
