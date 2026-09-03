@@ -56,7 +56,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
                 }
             }
 
-            if (table_geog_type == "LGD2014") table_selections += `,"${table_geog_type}":{"category":{"index":["${lgd_code}"]}}`;
+            if (["LGD2014", "LGD"].includes(table_geog_type)) table_selections += `,"${table_geog_type}":{"category":{"index":["${lgd_code}"]}}`;
 
             let table_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
                 encodeURIComponent('{"jsonrpc":"2.0","method":"PxStat.Data.Cube_API.ReadDataset","params":{"class":"query","id":' +

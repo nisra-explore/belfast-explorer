@@ -1,5 +1,5 @@
 {
-  "table_count": 332,
+  "table_count": 334,
   "tables": {
     "ADMITDEA": {
       "name": "Primary reason for admissions to HSC hospitals",
@@ -171,6 +171,104 @@
       "product": "Hospital activity",
       "product_code": "HAWLHA",
       "rows": 11952
+    },
+    "ALLAPPLGD": {
+      "name": "ApprenticeshipsNI and Higher Level Apprenticeships by LGD",
+      "updated": "2026-04-03",
+      "categories": {
+        "STATISTIC": {
+          "category": {
+            "index": ["START", "ALL"],
+            "label": {
+              "START": "Starts (first year only)",
+              "ALL": "Occupancy/Participation (all years)"
+            },
+            "unit": {
+              "START": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "ALL": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              }
+            }
+          },
+          "label": "Statistic"
+        },
+        "TLIST(A1)": {
+          "category": {
+            "index": ["2017/18", "2018/19", "2019/20", "2020/21", "2021/22", "2022/23", "2023/24", "2024/25"],
+            "label": {
+              "2017/18": "2017/18",
+              "2018/19": "2018/19",
+              "2019/20": "2019/20",
+              "2020/21": "2020/21",
+              "2021/22": "2021/22",
+              "2022/23": "2022/23",
+              "2023/24": "2023/24",
+              "2024/25": "2024/25"
+            }
+          },
+          "label": "Academic year"
+        },
+        "LGD": {
+          "category": {
+            "index": ["N09000001", "N09000011", "N09000002", "N09000003", "N09000004", "N09000005", "N09000006", "N09000007", "N09000008", "N09000009", "N09000010", "Unknown", "N92000002"],
+            "label": {
+              "N09000001": "Antrim and Newtownabbey",
+              "N09000011": "Ards and North Down",
+              "N09000002": "Armagh City, Banbridge and Craigavon",
+              "N09000003": "Belfast",
+              "N09000004": "Causeway Coast and Glens",
+              "N09000005": "Derry City and Strabane",
+              "N09000006": "Fermanagh and Omagh",
+              "N09000007": "Lisburn and Castlereagh",
+              "N09000008": "Mid and East Antrim",
+              "N09000009": "Mid Ulster",
+              "N09000010": "Newry, Mourne and Down",
+              "Unknown": "Unknown",
+              "N92000002": "Northern Ireland"
+            }
+          },
+          "label": "Local Government District",
+          "link": {
+            "enclosure": [
+              {
+                "type": "application/geo+json",
+                "href": "https://ws-data.nisra.gov.uk/public/api.static/PxStat.Data.GeoMap_API.Read/450c0bbfce9cc5595a6142e35c589ba5"
+              }
+            ]
+          }
+        },
+        "APPTYPE": {
+          "category": {
+            "index": ["APPSNI", "HLAFE", "HLAHEI", "ALLAPP"],
+            "label": {
+              "APPSNI": "ApprenticeshipsNI",
+              "HLAFE": "Higher Level Apprenticeships in further education",
+              "HLAHEI": "Higher Level Apprenticeships in higher education institutions",
+              "ALLAPP": "All apprenticeships (AppsNI, HLA in FE, HLA in HE)"
+            }
+          },
+          "label": "Type of apprenticeship"
+        }
+      },
+      "statistics": {
+        "START": "Starts (first year only)",
+        "ALL": "Occupancy/Participation (all years)"
+      },
+      "time": "TLIST(A1)",
+      "time_series": ["2017/18", "2018/19", "2019/20", "2020/21", "2021/22", "2022/23", "2023/24", "2024/25"],
+      "theme": "Education and skills",
+      "theme_code": 69,
+      "subject": "Training and apprenticeships",
+      "subject_code": 140,
+      "product": "Apprenticeships",
+      "product_code": "TAAPP",
+      "rows": 832
     },
     "APPSNILGD": {
       "name": "ApprenticeshipsNI",
@@ -24329,6 +24427,144 @@
       "product": "House sales and prices",
       "product_code": "PHHSP",
       "rows": 4620
+    },
+    "NIETS05": {
+      "name": "NIETS: Trade by Local Government District",
+      "updated": "2026-05-12",
+      "categories": {
+        "STATISTIC": {
+          "category": {
+            "index": ["BESESVALUE", "LOWER_CONF_INTERVAL", "UPPER_CONF_INTERVAL", "CV", "BESESCOUNT"],
+            "label": {
+              "BESESVALUE": "Value of Trade",
+              "LOWER_CONF_INTERVAL": "95% Confidence Interval - Lower",
+              "UPPER_CONF_INTERVAL": "95% Confidence Interval - Upper",
+              "CV": "Coefficient of Variation",
+              "BESESCOUNT": "Number of Businesses"
+            },
+            "unit": {
+              "BESESVALUE": {
+                "decimals": 0,
+                "label": "Pounds Sterling (£), Millions",
+                "position": "end"
+              },
+              "LOWER_CONF_INTERVAL": {
+                "decimals": 0,
+                "label": "Pounds Sterling (£), Millions",
+                "position": "end"
+              },
+              "UPPER_CONF_INTERVAL": {
+                "decimals": 0,
+                "label": "Pounds Sterling (£), Millions",
+                "position": "end"
+              },
+              "CV": {
+                "decimals": 1,
+                "label": "Percentage %",
+                "position": "end"
+              },
+              "BESESCOUNT": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              }
+            }
+          },
+          "label": "Statistic"
+        },
+        "TLIST(A1)": {
+          "category": {
+            "index": ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+            "label": {
+              "2011": "2011",
+              "2012": "2012",
+              "2013": "2013",
+              "2014": "2014",
+              "2015": "2015",
+              "2016": "2016",
+              "2017": "2017",
+              "2018": "2018",
+              "2019": "2019",
+              "2020": "2020",
+              "2021": "2021",
+              "2022": "2022",
+              "2023": "2023",
+              "2024": "2024"
+            }
+          },
+          "label": "Year"
+        },
+        "LGD": {
+          "category": {
+            "index": ["N09000001", "N09000002", "N09000003", "N09000004", "N09000005", "N09000006", "N09000007", "N09000008", "N09000009", "N09000010", "N09000011"],
+            "label": {
+              "N09000001": "Antrim and Newtownabbey",
+              "N09000002": "Armagh City, Banbridge and Craigavon",
+              "N09000003": "Belfast",
+              "N09000004": "Causeway Coast and Glens",
+              "N09000005": "Derry City and Strabane",
+              "N09000006": "Fermanagh and Omagh",
+              "N09000007": "Lisburn and Castlereagh",
+              "N09000008": "Mid and East Antrim",
+              "N09000009": "Mid Ulster",
+              "N09000010": "Newry, Mourne and Down",
+              "N09000011": "Ards and North Down"
+            }
+          },
+          "label": "Local Government District",
+          "link": {
+            "enclosure": [
+              {
+                "type": "application/geo+json",
+                "href": "https://ws-data.nisra.gov.uk/public/api.static/PxStat.Data.GeoMap_API.Read/450c0bbfce9cc5595a6142e35c589ba5"
+              }
+            ]
+          }
+        },
+        "BROADDEST": {
+          "category": {
+            "index": ["ALL", "NI", "GB", "IE", "REU", "ROW", "EXTERN", "EXPORT", "IMPORT"],
+            "label": {
+              "ALL": "All countries",
+              "NI": "Northern Ireland",
+              "GB": "Great Britain",
+              "IE": "Ireland",
+              "REU": "Rest of the Europe Union (EU excluding Ireland)",
+              "ROW": "Rest of the World (all countries outside the UK and EU)",
+              "EXTERN": "External Sales/Purchases (outside NI)",
+              "EXPORT": "Exports (outside UK)",
+              "IMPORT": "Imports (outside UK)"
+            }
+          },
+          "label": "Trade partner"
+        },
+        "FLOW": {
+          "category": {
+            "index": ["SALES", "PURCH"],
+            "label": {
+              "SALES": "Sales",
+              "PURCH": "Purchases"
+            }
+          },
+          "label": "Flow"
+        }
+      },
+      "statistics": {
+        "BESESVALUE": "Value of Trade",
+        "LOWER_CONF_INTERVAL": "95% Confidence Interval - Lower",
+        "UPPER_CONF_INTERVAL": "95% Confidence Interval - Upper",
+        "CV": "Coefficient of Variation",
+        "BESESCOUNT": "Number of Businesses"
+      },
+      "time": "TLIST(A1)",
+      "time_series": ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+      "theme": "Business, economy and trade",
+      "theme_code": 68,
+      "subject": "Trade",
+      "subject_code": 128,
+      "product": "Trade",
+      "product_code": "TTRADE",
+      "rows": 13860
     },
     "NIHPIVSLGD": {
       "name": "Verified residential property sales",

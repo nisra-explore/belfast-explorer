@@ -28,11 +28,11 @@ export function addOtherMenus (tables, matrix, geog_type, time_var, search) {
     other_vars = Object.keys(tables[matrix].categories)
         .filter(x => !normal_vars.includes(x));
 
-    if (["none", "NI", "LGD2014"].includes(geog_type)) {
+    if (["none", "NI", "LGD2014", "LGD"].includes(geog_type)) {
         map_card.classList.add("d-none");
         chart_card.classList.remove("col-xl-6");
         
-        id_vars = `["STATISTIC", "LGD2014", "${time_var}"`;
+        id_vars = `["STATISTIC", "${geog_type}", "${time_var}"`;
 
     } else {
 
