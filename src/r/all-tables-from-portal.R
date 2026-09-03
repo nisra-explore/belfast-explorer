@@ -164,7 +164,7 @@ for (i in seq_along(data_portal$label)) {
     )
   ) next
 
-  if (!"LGD2014" %in% names(json_data$dimension)) next
+  if (!any(c("LGD2014", "DEA2014") %in% names(json_data$dimension))) next
 
   tables$tables[[matrix]] <- list(
     name = name,
@@ -201,7 +201,7 @@ for (i in seq_along(data_portal$label)) {
         )
       ) next
 
-      if (!"LGD2014" %in% names(json_data$dimension)) next
+      if (!any(c("LGD2014", "DEA2014") %in% names(json_data$dimension))) next
 
       tables$tables[[paste0(matrix, "_", j)]] <- list(
         name = name,
@@ -226,6 +226,7 @@ for (i in seq_along(data_portal$label)) {
 }
 
 tables$tables <- tables$tables[order(names(tables$tables))]
+tables$table_count <- length(tables$tables)
 
 write_json(tables,
            paste0("public/data/", meta_name, ".json"),

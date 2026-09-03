@@ -41,15 +41,30 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
             let table_selections = other_selections.split(",");
             table_selections = table_selections.filter(x => x.indexOf(other_vars[i]) == -1)
             table_selections = table_selections.join(",");
-            if (geog_type != "none") table_selections += `,"${geog_type}":{"category":{"index":["${lgd_code}"]}}`;
+            let table_geog_type = geog_type;
+            let table_matrix = matrix;
+            let table_id_vars = id_vars;
+            if (geog_type == "DEA2014") {
+                if (matrix.indexOf("DEA") > -1) {
+                    table_geog_type = "LGD2014";
+                    table_matrix = matrix.replace("DEA", "LGD");
+                    table_id_vars = table_id_vars.replace("DEA2014", "LGD2014");
+                } else if (matrix == "MYE01T010") {
+                    table_geog_type = "LGD2014";
+                    table_matrix = "MYE01T04";
+                    table_id_vars = table_id_vars.replace("DEA2014", "LGD2014");
+                }
+            }
+
+            if (table_geog_type == "LGD2014") table_selections += `,"${table_geog_type}":{"category":{"index":["${lgd_code}"]}}`;
 
             let table_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
                 encodeURIComponent('{"jsonrpc":"2.0","method":"PxStat.Data.Cube_API.ReadDataset","params":{"class":"query","id":' +
-                    id_vars + ',"dimension":{"STATISTIC":{"category":{"index":["' +
+                    table_id_vars + ',"dimension":{"STATISTIC":{"category":{"index":["' +
                     statistic + '"]}},"' + time_var + '":{"category":{"index":["' + year +
                     '"]}}' + table_selections +
                     '},"extension":{"pivot":null,"codes":false,"language":{"code":"en"},"format":{"type":"JSON-stat","version":"2.0"},"matrix":"' +
-                    matrix + '"},"version":"2.0"}}');
+                    table_matrix + '"},"version":"2.0"}}');
 
             const response = await fetch(table_url);
             const { result } = await response.json();

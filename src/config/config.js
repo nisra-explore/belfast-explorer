@@ -40,7 +40,7 @@ export const GEOG_PROPS= {
     label: "Health and Social Care Trust"
   },
   DEA2014: { 
-    url: "public/map/DEA2014.geo.json", 
+    url: "public/map/DEA2014_with_LGD.geo.json",
     code_var: "DEA_code",
     label: "District Electoral Area" 
   },
