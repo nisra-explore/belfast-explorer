@@ -12,17 +12,17 @@ export const GEOG_PROPS= {
   LGD2014: { 
     url: "public/map/LGD2014.geo.json",
     code_var: "LGDCode",
-    label: "Local Government District"
+    label: lgd_name
   },
   LGD: { 
     url: "public/map/LGD2014.geo.json",
     code_var: "LGDCode" ,
-    label: "Local Government District"
+    label: lgd_name
   },
   LGD1992: {
     url: "public/map/LGD1992.geo.json",
     code_var: "LGD_CODE",
-    label: "Local Government District (1992)"
+    label: `${lgd_name} 1992`
   },
   AA: { 
     url: "public/map/AA.geo.json",

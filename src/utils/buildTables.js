@@ -4,7 +4,7 @@ import { additional_tables, table_tabs, table_tabs_content, tables_title,
 import { ni_result } from "./buildCharts.js";
 import { lgd_name, lgd_code } from "../config/config.js";
 
-export async function buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit) {
+export async function buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit, ward_type) {
 
     // Build a table for each additional variable and place behind a tab
     if (other_vars.length > 0) {
@@ -53,6 +53,14 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
                     table_geog_type = "LGD2014";
                     table_matrix = "MYE01T04";
                     table_id_vars = table_id_vars.replace("DEA2014", "LGD2014");
+                }
+            }
+
+            if (ward_type) {
+                if (matrix.indexOf("WARD") > -1) {
+                    table_geog_type = "LGD2014";
+                    table_matrix = matrix.replace("WARD", "LGD");
+                    table_id_vars = table_id_vars.replace(ward_type, "LGD2014");
                 }
             }
 

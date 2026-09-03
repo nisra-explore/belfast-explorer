@@ -164,7 +164,7 @@ for (i in seq_along(data_portal$label)) {
     )
   ) next
 
-  if (!any(c("LGD2014", "LGD", "DEA2014") %in% names(json_data$dimension))) next
+  if (!any(c("LGD2014", "LGD", "DEA2014", "Ward2014", "WARD2014") %in% names(json_data$dimension))) next
 
   tables$tables[[matrix]] <- list(
     name = name,
@@ -201,7 +201,7 @@ for (i in seq_along(data_portal$label)) {
         )
       ) next
 
-      if (!any(c("LGD2014", "LGD", "DEA2014") %in% names(json_data$dimension))) next
+      if (!any(c("LGD2014", "LGD", "DEA2014", "Ward2014", "WARD2014") %in% names(json_data$dimension))) next
 
       tables$tables[[paste0(matrix, "_", j)]] <- list(
         name = name,

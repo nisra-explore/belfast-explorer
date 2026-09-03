@@ -7,7 +7,7 @@ import { lgd_code, lgd_name } from "../config/config.js";
 
 export let ni_result;
 
-export async function buildCharts(tables, matrix, statistic, geog_type, result, plot_ni, time_var, subtitle_text, other_headline, other_selections, id_vars, stat_label, unit, lgd_matrix) {
+export async function buildCharts(tables, matrix, statistic, geog_type, result, plot_ni, time_var, subtitle_text, other_headline, other_selections, id_vars, stat_label, unit, lgd_matrix, ward_type) {
 
     let headline_value = "Not available";
     let data_series = null;
@@ -40,6 +40,13 @@ export async function buildCharts(tables, matrix, statistic, geog_type, result, 
                     '"]}}' + other_selections + '},"extension": {"pivot": null,"codes": false,"language": {"code": "en"},"format": {"type": "JSON-stat","version": "2.0"},"matrix": "' +
                     lgd_matrix + '"},"version": "2.0"}}')
 
+        }  else if (ward_type) {
+            ni_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' + 
+                encodeURIComponent('{"jsonrpc": "2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query","id": ' + id_vars.replace(ward_type, "LGD2014") + ',"dimension": {"LGD2014": {"category": {"index": ["' +
+                    lgd_code + 
+                    '"]}}' + other_selections + '},"extension": {"pivot": null,"codes": false,"language": {"code": "en"},"format": {"type": "JSON-stat","version": "2.0"},"matrix": "' +
+                    lgd_matrix + '"},"version": "2.0"}}')
+                    
         } else if (geog_type == "none") {
 
             ni_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +

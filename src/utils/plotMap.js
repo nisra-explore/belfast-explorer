@@ -54,6 +54,9 @@ export async function plotMap (tables, geog_type) {
     let plot_ni = false;
     let lgd_matrix;
 
+    let ward_type = null;
+    if (["Ward2014", "WARD2014"].includes(geog_type)) ward_type = geog_type;
+
     if (geog_type == "none") {
         plot_ni = true;
     } else if (geog_type == "DEA2014") {
@@ -66,6 +69,13 @@ export async function plotMap (tables, geog_type) {
         lgd_matrix = "MYE01T04";
         plot_ni = true;
     }
+    } else if (ward_type) {
+        if (matrix.indexOf("WARD") > -1) {
+            lgd_matrix = matrix.replace("WARD", "LGD");
+            if (Object.keys(tables).includes(lgd_matrix)) {
+                plot_ni = true;
+            }
+        }
     } else {
         if (result.dimension[geog_type].category.index.includes(lgd_code) || themes_menu.value == "67") {
             plot_ni = true;
@@ -98,8 +108,8 @@ export async function plotMap (tables, geog_type) {
             <div><a href="mailto:${result.extension.contact.email}">Email for more information</a></div>
         `;
 
-        const chartData = await buildCharts(tables, matrix, statistic, geog_type, result, plot_ni, time_var, subtitle_text, other_headline, other_selections, id_vars, stat_label, unit, lgd_matrix);
-        await buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit);
+        const chartData = await buildCharts(tables, matrix, statistic, geog_type, result, plot_ni, time_var, subtitle_text, other_headline, other_selections, id_vars, stat_label, unit, lgd_matrix, ward_type);
+        await buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit, ward_type);
         const data_series = chartData?.data_series ?? [];
         const time_series = chartData?.time_series ?? [];
 
@@ -318,9 +328,11 @@ export async function plotMap (tables, geog_type) {
              const features = geojsonData.features
                 // 1) If DEA2014, only keep features in the chosen LGD
                 .filter(f => {
-                    if (geog_type !== "DEA2014") return true;
+                    if (!["DEA2014", ward_type].includes(geog_type)) return true;
 
-                    const fLgd = String(f.properties.LGDCode ?? "")
+                    const LGD_property = geog_type === "DEA2014" ? "LGDCode" : "LGD_Code"
+
+                    const fLgd = String(f.properties[LGD_property] ?? "")
                     .replace(/\s+/g, "")
                     .toUpperCase();
 
@@ -535,6 +547,11 @@ export async function plotMap (tables, geog_type) {
             "chart",
             updated_text
         );
+
+        const lgd_names = document.getElementsByClassName("lgd-name");
+        for (let i = 0; i < lgd_names.length; i++) {
+            lgd_names[i].textContent = lgd_name;
+        }
 
 }
 
