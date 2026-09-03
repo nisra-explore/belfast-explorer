@@ -1,6 +1,14 @@
 /* ===========================
    Base
    =========================== */
+:root {
+	--nisra_blue: #3878c5;
+	--nisra_navy: #00205b;
+	--nisra_purple: #732777;
+  --nisra_slate: #3b3b3b;
+  --nisra_green: #68a41e;
+}
+
 body {
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
@@ -9,8 +17,8 @@ body {
 }
 
 /* Headings per style guide */
-h1 { font-size: 28px; line-height: 1.285; font-weight: 700; }
-@media (min-width: 992px) { h1 { font-size: 30px; line-height: 1.3; } }
+h1 { font-size: 3rem; line-height: 1.285; font-weight: 700; }
+@media (min-width: 1200px) { h1 { font-size: 3rem !important; line-height: 1.3;} }
 
 h2 { font-size: 24px; line-height: 1.333; font-weight: 400; }
 @media (min-width: 992px) { h2 { font-size: 25px; line-height: 1.32; } }
@@ -159,10 +167,24 @@ main a[target="_blank"]::after {
 /* ===========================
    Chart sizing
    =========================== */
+#capture .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#capture .card > #map-capture,
+#capture .card > #chart-capture {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
 #chart-container {
   height: 410px;          /* desktop/tablet */
   position: relative;
-  margin-bottom: 2em;
+  margin-top: 0.75rem;
+  margin-bottom: 0;
 }
 @media (max-width: 767.98px) { #chart-container { height: 220px; } }
 
@@ -179,13 +201,29 @@ main a[target="_blank"]::after {
 .app-title { font-weight: 700; letter-spacing: 0.2px; }
 .img-50 { width: 50px; height: 50px; }
 
+/* Clear, consistent focus style for keyboard users */
+:focus-visible {
+  outline: 3px solid #D4351C !important;      /* high-contrast colour */
+  outline-offset: 3px !important;
+}
+
+input:focus-visible, select:focus-visible, button:focus-visible, .map:has(canvas:focus-visible) {
+  outline: 3px solid #D4351C !important;
+  outline-offset: 3px !important;
+  box-shadow: none !important;
+}
+
+main:focus-visible {
+  outline: none !important;
+}
+
 /* ===========================
    Footer
    =========================== */
 .footer {
-  background-color: #00205b;
+  background-color: var(--nisra_navy);
   color: #fff;
-  border-top: 4px solid #3878c5;
+  border-top: 4px solid var(--nisra_blue);
 }
 .footer a {
   color: #fff;
@@ -194,7 +232,7 @@ main a[target="_blank"]::after {
 .footer a:hover,
 .footer a:focus {
   color: #fff;
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 3px;
 }
 .footer-links { list-style: none; padding-left: 0; }
 .footer-links .list-inline-item { margin: 0 .5rem; }
@@ -234,5 +272,124 @@ table tr:not(:has(th)):hover {
 }
 
 .btn-primary {
-  background-color: #3878c5;
+  background-color: var(--nisra_purple);
+  border-color: var(--nisra_purple);
+  color: #fff
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #5c636a;
+  border-color: #5c636a;
+}
+
+.sidebar-header {
+  background-color: var(--nisra_blue);
+  color: #fff;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+
+}
+
+.i-button {
+  height: 0.75em;
+  margin-left: 0.25em;
+  margin-bottom: 0.25em;
+  cursor: pointer;
+
+}
+
+#cookie-banner {
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color:#142062;
+	color:#FFF;
+	padding: 10px;
+	text-align: left;
+    display: none;
+}
+
+.cookies-infobar {
+    color: #fff;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding: 10px;
+    text-align: left;
+}
+
+.cookies-infobar.cookies-infobar_accepted {
+    display: none;
+}
+
+.cookies-infobar_wrapper {
+    margin: 10px;
+}
+
+.cookies-infobar a {
+    color: inherit;
+}
+
+.cookies-infobar_btn {
+  display: inline-block;
+  padding: 5px 10px;
+  background: #0f8243;
+  text-decoration: none;
+  color: #fff;
+  text-transform: none;
+  font-size: 1.2em;
+}
+
+a.cookies-infobar_btn, a.cookies-infobar_btn_reject {
+	color: #fff !important;
+}
+
+a.cookiesbarlink {
+    color: #2990FF;
+}
+
+.cookies-infobar_btn_reject {
+  display: inline-block;
+  padding: 5px 10px;
+  background: #6d6e72;
+  text-decoration: none;
+  border-radius: 3px;
+  color: #fff;
+  text-transform: none;
+  font-size: 1.2em;
+}
+
+@media (min-width: 1200px) {
+  #buttons {
+    margin-bottom: -38px;
+  }
+}
+
+.breadcrumb {
+  color: #687178
+}
+
+.bg-navy {
+  background-color: var(--nisra_navy);
+}
+
+.bg-blue {
+  background-color: var(--nisra_blue);
+}
+
+.bg-green {
+  background-color: var(--nisra_green);
+}
+
+.h-16px {
+  height: 16px;
+}
+
+a:hover,
+a:focus {
+  text-decoration-thickness: 3px;
 }

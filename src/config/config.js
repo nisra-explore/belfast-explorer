@@ -1,3 +1,6 @@
+// Metadata json file name. If forking do not use "data-portal-tables"
+export const meta_name = "belfast-tables";
+
 // Default data to show on page load
 export const default_table = "MYE01T010";
 
@@ -37,7 +40,7 @@ export const GEOG_PROPS= {
     label: "Health and Social Care Trust"
   },
   DEA2014: { 
-    url: "public/map/DEA2014_with_LGD.geo.json", 
+    url: "public/map/DEA2014_with_LGD.geo.json",
     code_var: "DEA_code",
     label: "District Electoral Area" 
   },
@@ -52,6 +55,11 @@ export const GEOG_PROPS= {
     label: "Data Zone"
   },
   Ward2014:{ 
+    url: "public/map/Ward2014.geo.json",
+    code_var: "Ward_Code",
+    label: "Ward"
+  },
+  WARD2014:{ 
     url: "public/map/Ward2014.geo.json",
     code_var: "Ward_Code",
     label: "Ward"
@@ -98,10 +106,8 @@ export const GEOG_PROPS= {
   },
   EQUALGROUPS: {
     label: "Equality Groups"
-  },
-  NI: {
-    label: "Northern Ireland"
   }
+
 }
 
   // Colour palette for charts

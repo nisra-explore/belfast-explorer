@@ -5,7 +5,6 @@ export const products_menu = document.getElementById("product");
 export const names_menu = document.getElementById("name");
 export const geo_menu = document.getElementById("geo");
 export const stats_menu = document.getElementById("stat");
-export const search = window.location.search.replace("?", "").split("&");
 export const chart_container = document.getElementById("chart-container");
 export const map_container = document.getElementById("map-container");
 export const map_subtitle = document.getElementById("map-subtitle");
@@ -38,9 +37,20 @@ export const table_tabs = document.getElementById("table-tabs");
 export const table_tabs_content = document.getElementById("table-tabs-content");
 export const tables_title = document.getElementById("tables-title");
 export const table_updated = document.getElementById("table-updated");
-export const save_map = document.getElementById("save-map");
-export const save_chart = document.getElementById("save-chart");
 export const share_btn = document.querySelectorAll('button[type="share"]');
+export const headline_stat_label = document.getElementById("headline-stat-label");
+export const stat_info_text = document.getElementById("stat-info-text");
+export const download_btn = document.getElementById("download-btn");
+export const capture = document.getElementById("capture");
+export const headline_year = document.getElementById("headline-year");
+export const skip_link = document.getElementById("skip-link");
+export const SIDEBAR_OPEN_KEY = "nisra:data-explorer:sidebarOpen";
 export const dashboard_title = document.getElementById("dashboard-title");
 
-export const SIDEBAR_OPEN_KEY = "nisra:data-explorer:sidebarOpen";
+/**
+ * Re-reads query string on call
+ * @returns 
+ */
+export function getSearch() {
+    return window.location.search.replace("?", "").split("&");
+}
