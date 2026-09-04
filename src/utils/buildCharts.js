@@ -3,7 +3,7 @@ import { yAxisLabelPlugin } from "./yAxisLabelPlugin.js";
 import { chart_container, chart_card, chart_title, chart_subtitle,
          headline_fig, headline_stat, headline_year,
          themes_menu } from "./elements.js";
-import { lgd_code, lgd_name } from "../config/config.js";
+import { lgd_code, lgd_name, hsct_code } from "../config/config.js";
 
 export let ni_result;
 
@@ -35,14 +35,16 @@ export async function buildCharts(tables, matrix, statistic, geog_type, result, 
 
         if (geog_type == "DEA2014") {
             ni_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' + 
-                encodeURIComponent('{"jsonrpc": "2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query","id": ' + id_vars.replace("DEA2014", "LGD2014") + ',"dimension": {"LGD2014": {"category": {"index": ["' +
+                encodeURIComponent('{"jsonrpc": "2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query","id": ' + id_vars.replace("DEA2014", "LGD2014") + ',"dimension": {"STATISTIC": {"category": {"index": ["' +
+                    statistic + '"]}}, "LGD2014": {"category": {"index": ["' +
                     lgd_code + 
                     '"]}}' + other_selections + '},"extension": {"pivot": null,"codes": false,"language": {"code": "en"},"format": {"type": "JSON-stat","version": "2.0"},"matrix": "' +
                     lgd_matrix + '"},"version": "2.0"}}')
 
         }  else if (ward_type) {
             ni_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' + 
-                encodeURIComponent('{"jsonrpc": "2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query","id": ' + id_vars.replace(ward_type, "LGD2014") + ',"dimension": {"LGD2014": {"category": {"index": ["' +
+                encodeURIComponent('{"jsonrpc": "2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query","id": ' + id_vars.replace(ward_type, "LGD2014") + ',"dimension": {"STATISTIC": {"category": {"index": ["' +
+                    statistic + '"]}}, "LGD2014": {"category": {"index": ["' +
                     lgd_code + 
                     '"]}}' + other_selections + '},"extension": {"pivot": null,"codes": false,"language": {"code": "en"},"format": {"type": "JSON-stat","version": "2.0"},"matrix": "' +
                     lgd_matrix + '"},"version": "2.0"}}')
@@ -52,6 +54,13 @@ export async function buildCharts(tables, matrix, statistic, geog_type, result, 
             ni_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
                 encodeURIComponent('{"jsonrpc":"2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query", "id": ' + id_vars + ', "dimension": { "STATISTIC": {"category": {"index": ["' + statistic +
                     '"]}}' + other_selections + '},"extension": {"pivot": null,"codes": false,"language": {"code":"en"},"format":{"type": "JSON-stat","version": "2.0"},"matrix": "' +
+                    matrix + '"},"version": "2.0"}}');
+
+        } else if (geog_type == "HSCT") {
+            ni_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
+                encodeURIComponent('{"jsonrpc": "2.0", "method": "PxStat.Data.Cube_API.ReadDataset", "params": {"class": "query", "id": ' + id_vars + ', "dimension": { "STATISTIC": {"category": {"index": ["' + statistic +
+                    '"]}}, "' + geog_type +
+                    '": {"category": {"index": ["' + hsct_code + '"]}}' + other_selections + '},"extension": {"pivot": null,"codes": false,"language": {"code":"en"},"format":{"type": "JSON-stat","version": "2.0"},"matrix": "' +
                     matrix + '"},"version": "2.0"}}');
 
         } else {

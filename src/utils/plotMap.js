@@ -77,7 +77,7 @@ export async function plotMap (tables, geog_type) {
             }
         }
     } else {
-        if (result.dimension[geog_type].category.index.includes(lgd_code) || themes_menu.value == "67") {
+        if (result.dimension[geog_type].category.index.includes(lgd_code) || themes_menu.value == "67" || geog_type == "HSCT") {
             plot_ni = true;
         }
     }    
@@ -94,24 +94,23 @@ export async function plotMap (tables, geog_type) {
         niHeadline.classList.add("d-none");
     }
 
+    headline_stat_label.innerHTML = `
+        ${stat_label}
+        <img class="i-button" src="assets/img/icon/info-circle.svg" alt="Information button"
+            data-bs-toggle="collapse" data-bs-target="#stat-info" aria-expanded="false"
+            aria-controls="stat-info">
+    `;
 
-        headline_stat_label.innerHTML = `
-            ${stat_label}
-            <img class="i-button" src="assets/img/icon/info-circle.svg" alt="Information button"
-                data-bs-toggle="collapse" data-bs-target="#stat-info" aria-expanded="false"
-                aria-controls="stat-info">
-        `;
+    stat_info_text.innerHTML = `
+        <div>Access data at: <a href="https://data.nisra.gov.uk/table/${matrix}" target="_blank">${result.label}</a></div>
+        <div>Last updated: <strong>${result.updated.substr(8, 2)}/${result.updated.substr(5, 2)}/${result.updated.substr(0, 4)}</strong></div>
+        <div><a href="mailto:${result.extension.contact.email}">Email for more information</a></div>
+    `;
 
-        stat_info_text.innerHTML = `
-            <div>Access data at: <a href="https://data.nisra.gov.uk/table/${matrix}" target="_blank">${result.label}</a></div>
-            <div>Last updated: <strong>${result.updated.substr(8, 2)}/${result.updated.substr(5, 2)}/${result.updated.substr(0, 4)}</strong></div>
-            <div><a href="mailto:${result.extension.contact.email}">Email for more information</a></div>
-        `;
-
-        const chartData = await buildCharts(tables, matrix, statistic, geog_type, result, plot_ni, time_var, subtitle_text, other_headline, other_selections, id_vars, stat_label, unit, lgd_matrix, ward_type);
-        await buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit, ward_type);
-        const data_series = chartData?.data_series ?? [];
-        const time_series = chartData?.time_series ?? [];
+    const chartData = await buildCharts(tables, matrix, statistic, geog_type, result, plot_ni, time_var, subtitle_text, other_headline, other_selections, id_vars, stat_label, unit, lgd_matrix, ward_type);
+    await buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit, ward_type);
+    const data_series = chartData?.data_series ?? [];
+    const time_series = chartData?.time_series ?? [];
 
     if (!plot_ni) {
         
@@ -130,6 +129,7 @@ export async function plotMap (tables, geog_type) {
     }
 
     let data;
+    const geojsonData = await loadShapes(geog_type);
 
     if (!["none", "NI"].includes(geog_type)) {
 
@@ -147,6 +147,26 @@ export async function plotMap (tables, geog_type) {
             result.value.splice(u_position, 1);
             result.dimension[geog_type].category.index.splice(u_position, 1);
             delete result.dimension[geog_type].category.label["Unknown"];
+        }
+
+        if (geog_type == "DEA2014") {
+            const DEA_codes = geojsonData
+                .features
+                .filter(f => f.properties.LGDCode == lgd_code)
+                .map(f => f.properties.DEA_code);
+            const DEA_positions = DEA_codes.map(code => result.dimension[geog_type].category.index.indexOf(code)).filter(pos => pos >= 0);
+            result.value = result.value.filter((v, i) => DEA_positions.includes(i));
+            result.dimension[geog_type].category.index = result.dimension[geog_type].category.index.filter((v, i) => DEA_positions.includes(i));
+        }
+
+        if (["Ward2014", "WARD2014"].includes(geog_type)) {
+            const Ward_codes = geojsonData
+                .features
+                .filter(f => f.properties.LGD_Code == lgd_code)
+                .map(f => f.properties.Ward_Code);
+            const Ward_positions = Ward_codes.map(code => result.dimension[geog_type].category.index.indexOf(code)).filter(pos => pos >= 0);
+            result.value = result.value.filter((v, i) => Ward_positions.includes(i));
+            result.dimension[geog_type].category.index = result.dimension[geog_type].category.index.filter((v, i) => Ward_positions.includes(i));
         }
 
         const cleaned = result.value.map(v =>
@@ -313,7 +333,7 @@ export async function plotMap (tables, geog_type) {
         'top-right'           // positions: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
         );
             
-        const geojsonData = await loadShapes(geog_type);
+        
 
 
         map.on('load', async () => {

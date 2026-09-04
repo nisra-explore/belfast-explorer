@@ -2,7 +2,7 @@ import { additional_tables, table_tabs, table_tabs_content, tables_title,
          stats_menu, chart_title } from "./elements.js";
 
 import { ni_result } from "./buildCharts.js";
-import { lgd_name, lgd_code } from "../config/config.js";
+import { lgd_name, lgd_code, hsct_code } from "../config/config.js";
 
 export async function buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit, ward_type) {
 
@@ -65,6 +65,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
             }
 
             if (["LGD2014", "LGD"].includes(table_geog_type)) table_selections += `,"${table_geog_type}":{"category":{"index":["${lgd_code}"]}}`;
+            if (["HSCT"].includes(table_geog_type)) table_selections += `,"${table_geog_type}":{"category":{"index":["${hsct_code}"]}}`;
 
             let table_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
                 encodeURIComponent('{"jsonrpc":"2.0","method":"PxStat.Data.Cube_API.ReadDataset","params":{"class":"query","id":' +
@@ -161,9 +162,13 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
             div.id = `table-tab-statistic`;
 
             let table_selections = "";
-            if (geog_type != "none") table_selections += `,"${geog_type}":{"category":{"index":["${lgd_code}"]}}`;
-
-            
+            if (geog_type != "none") {
+                if (geog_type == "HSCT") {
+                    table_selections += `,"${geog_type}":{"category":{"index":["${hsct_code}"]}}`;
+                } else {
+                    table_selections += `,"${geog_type}":{"category":{"index":["${lgd_code}"]}}`;
+                }
+            }
 
             let table_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
                 encodeURIComponent('{"jsonrpc":"2.0","method":"PxStat.Data.Cube_API.ReadDataset","params":{"class":"query","id":["' +

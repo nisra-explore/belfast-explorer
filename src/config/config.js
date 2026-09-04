@@ -7,6 +7,9 @@ export const default_table = "MYE01T010";
 export const lgd_code = "N09000003"; // Belfast
 export const lgd_name = "Belfast";
 
+export const hsct_code = "BHSCT";
+const hsct_name = "Belfast";
+
 // Lookup for geojson files
 export const GEOG_PROPS= {
   LGD2014: { 
@@ -37,7 +40,7 @@ export const GEOG_PROPS= {
   HSCT:    { 
     url: "public/map/HSCT.geo.json",
     code_var: "TrustCode",
-    label: "Health and Social Care Trust"
+    label: `${hsct_name} Health and Social Care Trust`
   },
   DEA2014: { 
     url: "public/map/DEA2014_with_LGD.geo.json",
