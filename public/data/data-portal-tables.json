@@ -1,5 +1,5 @@
 {
-  "table_count": 1170,
+  "table_count": 1172,
   "tables": {
     "ABI01": {
       "name": "Annual Business Inquiry: results by industry sector",
@@ -51417,7 +51417,7 @@
     },
     "FPSGDSDRAA": {
       "name": "General dental services dental registrations",
-      "updated": "2026-06-22",
+      "updated": "2026-09-07",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -51485,10 +51485,11 @@
         },
         "Age": {
           "category": {
-            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR18plus", "All"],
+            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR6-17", "GDSDR18plus", "All"],
             "label": {
               "GDSDR0-2": "Age 0 to 2",
               "GDSDR3-5": "Age 3 to 5",
+              "GDSDR6-17": "Age 6 to 17",
               "GDSDR18plus": "Age 18+",
               "All": "All Registrations"
             }
@@ -51507,11 +51508,11 @@
       "subject_code": 146,
       "product": "Dental",
       "product_code": "PCDENT",
-      "rows": 988
+      "rows": 1235
     },
     "FPSGDSDRDEA": {
       "name": "General dental services dental registrations",
-      "updated": "2026-06-22",
+      "updated": "2026-09-07",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -51641,10 +51642,11 @@
         },
         "Age": {
           "category": {
-            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR18plus", "All"],
+            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR6-17", "GDSDR18plus", "All"],
             "label": {
               "GDSDR0-2": "Age 0 to 2",
               "GDSDR3-5": "Age 3 to 5",
+              "GDSDR6-17": "Age 6 to 17",
               "GDSDR18plus": "Age 18+",
               "All": "All Registrations"
             }
@@ -51663,11 +51665,83 @@
       "subject_code": 146,
       "product": "Dental",
       "product_code": "PCDENT",
-      "rows": 4212
+      "rows": 5265
+    },
+    "FPSGDSDREQ": {
+      "name": "General dental services dental registrations",
+      "updated": "2026-09-07",
+      "categories": {
+        "STATISTIC": {
+          "category": {
+            "index": "Dental_Registrations",
+            "label": {
+              "Dental_Registrations": "Dental registrations"
+            },
+            "unit": {
+              "Dental_Registrations": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              }
+            }
+          },
+          "label": "Statistic"
+        },
+        "TLIST(A1)": {
+          "category": {
+            "index": ["2013/14", "2014/15", "2015/16", "2016/17", "2017/18", "2018/19", "2019/20", "2020/21", "2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
+            "label": {
+              "2013/14": "2013/14",
+              "2014/15": "2014/15",
+              "2015/16": "2015/16",
+              "2016/17": "2016/17",
+              "2017/18": "2017/18",
+              "2018/19": "2018/19",
+              "2019/20": "2019/20",
+              "2020/21": "2020/21",
+              "2021/22": "2021/22",
+              "2022/23": "2022/23",
+              "2023/24": "2023/24",
+              "2024/25": "2024/25",
+              "2025/26": "2025/26"
+            }
+          },
+          "label": "Financial year"
+        },
+        "EQGRP": {
+          "category": {
+            "index": ["EQ101", "EQ102", "EQ103", "EQ104", "EQ105", "EQ106", "EQ251", "EQ252", "N92000002"],
+            "label": {
+              "EQ101": "Age -  0-15",
+              "EQ102": "Age - 16-24",
+              "EQ103": "Age - 25-44",
+              "EQ104": "Age - 45-64",
+              "EQ105": "Age - 65-74",
+              "EQ106": "Age - 75+",
+              "EQ251": "Gender - Female",
+              "EQ252": "Gender - Male",
+              "N92000002": "Northern Ireland"
+            }
+          },
+          "label": "Equality group"
+        }
+      },
+      "statistics": {
+        "Dental_Registrations": "Dental registrations"
+      },
+      "time": "TLIST(A1)",
+      "time_series": ["2013/14", "2014/15", "2015/16", "2016/17", "2017/18", "2018/19", "2019/20", "2020/21", "2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
+      "theme": "Health and social care",
+      "theme_code": 6,
+      "subject": "Primary care",
+      "subject_code": 146,
+      "product": "Dental",
+      "product_code": "PCDENT",
+      "rows": 117
     },
     "FPSGDSDREW": {
       "name": "General dental services dental registrations",
-      "updated": "2026-06-22",
+      "updated": "2026-09-07",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -52179,10 +52253,11 @@
         },
         "Age": {
           "category": {
-            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR18plus", "All"],
+            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR6-17", "GDSDR18plus", "All"],
             "label": {
               "GDSDR0-2": "Age 0 to 2",
               "GDSDR3-5": "Age 3 to 5",
+              "GDSDR6-17": "Age 6 to 17",
               "GDSDR18plus": "Age 18+",
               "All": "All Registrations"
             }
@@ -52201,11 +52276,11 @@
       "subject_code": 146,
       "product": "Dental",
       "product_code": "PCDENT",
-      "rows": 24076
+      "rows": 30095
     },
     "FPSGDSDRHSCT": {
       "name": "General dental services dental registrations",
-      "updated": "2026-06-22",
+      "updated": "2026-09-07",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -52260,10 +52335,11 @@
         },
         "Age": {
           "category": {
-            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR18plus", "All"],
+            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR6-17", "GDSDR18plus", "All"],
             "label": {
               "GDSDR0-2": "Age 0 to 2",
               "GDSDR3-5": "Age 3 to 5",
+              "GDSDR6-17": "Age 6 to 17",
               "GDSDR18plus": "Age 18+",
               "All": "All Registrations"
             }
@@ -52282,11 +52358,11 @@
       "subject_code": 146,
       "product": "Dental",
       "product_code": "PCDENT",
-      "rows": 312
+      "rows": 390
     },
     "FPSGDSDRLCG": {
       "name": "General dental services dental registrations",
-      "updated": "2026-06-22",
+      "updated": "2026-09-07",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -52341,10 +52417,11 @@
         },
         "Age": {
           "category": {
-            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR18plus", "All"],
+            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR6-17", "GDSDR18plus", "All"],
             "label": {
               "GDSDR0-2": "Age 0 to 2",
               "GDSDR3-5": "Age 3 to 5",
+              "GDSDR6-17": "Age 6 to 17",
               "GDSDR18plus": "Age 18+",
               "All": "All Registrations"
             }
@@ -52363,11 +52440,11 @@
       "subject_code": 146,
       "product": "Dental",
       "product_code": "PCDENT",
-      "rows": 312
+      "rows": 390
     },
     "FPSGDSDRLGD": {
       "name": "General dental services dental registrations",
-      "updated": "2026-06-22",
+      "updated": "2026-09-07",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -52428,10 +52505,11 @@
         },
         "Age": {
           "category": {
-            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR18plus", "All"],
+            "index": ["GDSDR0-2", "GDSDR3-5", "GDSDR6-17", "GDSDR18plus", "All"],
             "label": {
               "GDSDR0-2": "Age 0 to 2",
               "GDSDR3-5": "Age 3 to 5",
+              "GDSDR6-17": "Age 6 to 17",
               "GDSDR18plus": "Age 18+",
               "All": "All Registrations"
             }
@@ -52450,7 +52528,7 @@
       "subject_code": 146,
       "product": "Dental",
       "product_code": "PCDENT",
-      "rows": 624
+      "rows": 780
     },
     "FPSGDSDSAA": {
       "name": "General dental services dentists and surgeries",
@@ -53726,6 +53804,99 @@
       "product": "Dental",
       "product_code": "PCDENT",
       "rows": 4212
+    },
+    "FPSGDSDTEQ": {
+      "name": "General dental services dental treatments",
+      "updated": "2026-09-07",
+      "categories": {
+        "STATISTIC": {
+          "category": {
+            "index": ["GDSDTF", "GDSDTE", "GDSDTC", "GDSDTX"],
+            "label": {
+              "GDSDTF": "Fillings",
+              "GDSDTE": "Extractions",
+              "GDSDTC": "Crowns",
+              "GDSDTX": "XRays"
+            },
+            "unit": {
+              "GDSDTF": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "GDSDTE": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "GDSDTC": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "GDSDTX": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              }
+            }
+          },
+          "label": "Statistic"
+        },
+        "TLIST(A1)": {
+          "category": {
+            "index": ["2013/14", "2014/15", "2015/16", "2016/17", "2017/18", "2018/19", "2019/20", "2020/21", "2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
+            "label": {
+              "2013/14": "2013/14",
+              "2014/15": "2014/15",
+              "2015/16": "2015/16",
+              "2016/17": "2016/17",
+              "2017/18": "2017/18",
+              "2018/19": "2018/19",
+              "2019/20": "2019/20",
+              "2020/21": "2020/21",
+              "2021/22": "2021/22",
+              "2022/23": "2022/23",
+              "2023/24": "2023/24",
+              "2024/25": "2024/25",
+              "2025/26": "2025/26"
+            }
+          },
+          "label": "Financial year"
+        },
+        "EQGRP": {
+          "category": {
+            "index": ["EQ101", "EQ102", "EQ103", "EQ104", "EQ105", "EQ106", "EQ251", "EQ252", "N92000002"],
+            "label": {
+              "EQ101": "Age -  0-15",
+              "EQ102": "Age - 16-24",
+              "EQ103": "Age - 25-44",
+              "EQ104": "Age - 45-64",
+              "EQ105": "Age - 65-74",
+              "EQ106": "Age - 75+",
+              "EQ251": "Gender - Female",
+              "EQ252": "Gender - Male",
+              "N92000002": "Northern Ireland"
+            }
+          },
+          "label": "Equality group"
+        }
+      },
+      "statistics": {
+        "GDSDTF": "Fillings",
+        "GDSDTE": "Extractions",
+        "GDSDTC": "Crowns",
+        "GDSDTX": "XRays"
+      },
+      "time": "TLIST(A1)",
+      "time_series": ["2013/14", "2014/15", "2015/16", "2016/17", "2017/18", "2018/19", "2019/20", "2020/21", "2021/22", "2022/23", "2023/24", "2024/25", "2025/26"],
+      "theme": "Health and social care",
+      "theme_code": 6,
+      "subject": "Primary care",
+      "subject_code": 146,
+      "product": "Dental",
+      "product_code": "PCDENT",
+      "rows": 468
     },
     "FPSGDSDTEW": {
       "name": "General dental services dental treatments",
