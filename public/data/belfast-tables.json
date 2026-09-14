@@ -1,5 +1,5 @@
 {
-  "table_count": 497,
+  "table_count": 500,
   "tables": {
     "ACILWHSCT": {
       "name": "Continuous Household Survey: Accidents/Illnesses at Work",
@@ -60833,6 +60833,246 @@
       "product": "Experience of crime",
       "product_code": "EAEC",
       "rows": 120
+    },
+    "TOURISM11": {
+      "name": "VAT and/or PAYE tourism businesses",
+      "updated": "2026-09-14",
+      "categories": {
+        "STATISTIC": {
+          "category": {
+            "index": "VATPAYE_TB",
+            "label": {
+              "VATPAYE_TB": "VAT and/or PAYE tourism businesses"
+            },
+            "unit": {
+              "VATPAYE_TB": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              }
+            }
+          },
+          "label": "Statistic"
+        },
+        "TLIST(A1)": {
+          "category": {
+            "index": ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+            "label": {
+              "2015": "2015",
+              "2016": "2016",
+              "2017": "2017",
+              "2018": "2018",
+              "2019": "2019",
+              "2020": "2020",
+              "2021": "2021",
+              "2022": "2022",
+              "2023": "2023",
+              "2024": "2024",
+              "2025": "2025"
+            }
+          },
+          "label": "Year"
+        },
+        "LGD2014": {
+          "category": {
+            "index": ["N09000001", "N09000002", "N09000003", "N09000004", "N09000005", "N09000006", "N09000007", "N09000008", "N09000009", "N09000010", "N09000011", "N92000002"],
+            "label": {
+              "N09000001": "Antrim and Newtownabbey",
+              "N09000002": "Armagh City, Banbridge and Craigavon",
+              "N09000003": "Belfast",
+              "N09000004": "Causeway Coast and Glens",
+              "N09000005": "Derry City and Strabane",
+              "N09000006": "Fermanagh and Omagh",
+              "N09000007": "Lisburn and Castlereagh",
+              "N09000008": "Mid and East Antrim",
+              "N09000009": "Mid Ulster",
+              "N09000010": "Newry, Mourne and Down",
+              "N09000011": "Ards and North Down",
+              "N92000002": "Northern Ireland"
+            }
+          },
+          "label": "Local Government District",
+          "link": {
+            "enclosure": [
+              {
+                "type": "application/geo+json",
+                "href": "https://ws-data.nisra.gov.uk/public/api.static/PxStat.Data.GeoMap_API.Read/450c0bbfce9cc5595a6142e35c589ba5"
+              }
+            ]
+          }
+        }
+      },
+      "statistics": {
+        "VATPAYE_TB": "VAT and/or PAYE tourism businesses"
+      },
+      "time": "TLIST(A1)",
+      "time_series": ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+      "theme": "Business, economy and trade",
+      "theme_code": 68,
+      "subject": "Tourism",
+      "subject_code": 127,
+      "product": "Jobs",
+      "product_code": "TJOBS",
+      "rows": 132
+    },
+    "TOURISM12": {
+      "name": "Employee jobs in tourism related industries",
+      "updated": "2026-09-14",
+      "categories": {
+        "STATISTIC": {
+          "category": {
+            "index": "EMPJOBS_TRI",
+            "label": {
+              "EMPJOBS_TRI": "Employee jobs in tourism related industries"
+            },
+            "unit": {
+              "EMPJOBS_TRI": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              }
+            }
+          },
+          "label": "Statistic"
+        },
+        "TLIST(A1)": {
+          "category": {
+            "index": ["2021", "2022"],
+            "label": {
+              "2021": "2021",
+              "2022": "2022"
+            }
+          },
+          "label": "Year"
+        },
+        "LGD2014": {
+          "category": {
+            "index": ["N09000001", "N09000002", "N09000003", "N09000004", "N09000005", "N09000006", "N09000007", "N09000008", "N09000009", "N09000010", "N09000011", "N92000002"],
+            "label": {
+              "N09000001": "Antrim and Newtownabbey",
+              "N09000002": "Armagh City, Banbridge and Craigavon",
+              "N09000003": "Belfast",
+              "N09000004": "Causeway Coast and Glens",
+              "N09000005": "Derry City and Strabane",
+              "N09000006": "Fermanagh and Omagh",
+              "N09000007": "Lisburn and Castlereagh",
+              "N09000008": "Mid and East Antrim",
+              "N09000009": "Mid Ulster",
+              "N09000010": "Newry, Mourne and Down",
+              "N09000011": "Ards and North Down",
+              "N92000002": "Northern Ireland"
+            }
+          },
+          "label": "Local Government District",
+          "link": {
+            "enclosure": [
+              {
+                "type": "application/geo+json",
+                "href": "https://ws-data.nisra.gov.uk/public/api.static/PxStat.Data.GeoMap_API.Read/450c0bbfce9cc5595a6142e35c589ba5"
+              }
+            ]
+          }
+        }
+      },
+      "statistics": {
+        "EMPJOBS_TRI": "Employee jobs in tourism related industries"
+      },
+      "time": "TLIST(A1)",
+      "time_series": ["2021", "2022"],
+      "theme": "Business, economy and trade",
+      "theme_code": 68,
+      "subject": "Tourism",
+      "subject_code": 127,
+      "product": "Jobs",
+      "product_code": "TJOBS",
+      "rows": 24
+    },
+    "TOURISM13": {
+      "name": "Overnight trips, nights and associated expenditure",
+      "updated": "2026-09-14",
+      "categories": {
+        "STATISTIC": {
+          "category": {
+            "index": ["TRIPS", "NIGHTS", "EXPENDITURE"],
+            "label": {
+              "TRIPS": "Overnight trips",
+              "NIGHTS": "Nights stayed",
+              "EXPENDITURE": "Associated expenditure"
+            },
+            "unit": {
+              "TRIPS": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "NIGHTS": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "EXPENDITURE": {
+                "decimals": 0,
+                "label": "Pounds Sterling (£)",
+                "position": "end"
+              }
+            }
+          },
+          "label": "Statistic"
+        },
+        "TLIST(A1)": {
+          "category": {
+            "index": ["2023", "2024", "2025"],
+            "label": {
+              "2023": "2023",
+              "2024": "2024",
+              "2025": "2025"
+            }
+          },
+          "label": "Year"
+        },
+        "LGD2014": {
+          "category": {
+            "index": ["N09000001", "N09000002", "N09000003", "N09000004", "N09000005", "N09000006", "N09000007", "N09000008", "N09000009", "N09000010", "N09000011", "N92000002"],
+            "label": {
+              "N09000001": "Antrim and Newtownabbey",
+              "N09000002": "Armagh City, Banbridge and Craigavon",
+              "N09000003": "Belfast",
+              "N09000004": "Causeway Coast and Glens",
+              "N09000005": "Derry City and Strabane",
+              "N09000006": "Fermanagh and Omagh",
+              "N09000007": "Lisburn and Castlereagh",
+              "N09000008": "Mid and East Antrim",
+              "N09000009": "Mid Ulster",
+              "N09000010": "Newry, Mourne and Down",
+              "N09000011": "Ards and North Down",
+              "N92000002": "Northern Ireland"
+            }
+          },
+          "label": "Local Government District",
+          "link": {
+            "enclosure": [
+              {
+                "type": "application/geo+json",
+                "href": "https://ws-data.nisra.gov.uk/public/api.static/PxStat.Data.GeoMap_API.Read/450c0bbfce9cc5595a6142e35c589ba5"
+              }
+            ]
+          }
+        }
+      },
+      "statistics": {
+        "TRIPS": "Overnight trips",
+        "NIGHTS": "Nights stayed",
+        "EXPENDITURE": "Associated expenditure"
+      },
+      "time": "TLIST(A1)",
+      "time_series": ["2023", "2024", "2025"],
+      "theme": "Business, economy and trade",
+      "theme_code": 68,
+      "subject": "Tourism",
+      "subject_code": 127,
+      "product": "Trips",
+      "product_code": "TTRIP",
+      "rows": 108
     },
     "TS004": {
       "name": "Usual resident population - 2011 and 2021 TS004",
