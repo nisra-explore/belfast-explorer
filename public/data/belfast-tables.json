@@ -1,5 +1,5 @@
 {
-  "table_count": 500,
+  "table_count": 504,
   "tables": {
     "ACILWHSCT": {
       "name": "Continuous Household Survey: Accidents/Illnesses at Work",
@@ -275,7 +275,7 @@
     },
     "ALLAPPLGD": {
       "name": "ApprenticeshipsNI and Higher Level Apprenticeships by LGD",
-      "updated": "2026-04-03",
+      "updated": "2026-09-17",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -58709,6 +58709,394 @@
       "product": "Skills for life and work",
       "product_code": "TASFLW",
       "rows": 52
+    },
+    "SMKCES05A": {
+      "name": "Smoking cessation - setting a quit date",
+      "updated": "2026-09-17",
+      "categories": {
+        "STATISTIC": {
+          "category": {
+            "index": ["QUITDATE", "PER_QUITDATE"],
+            "label": {
+              "QUITDATE": "People setting a quit date",
+              "PER_QUITDATE": "Percentage of people setting a quit date"
+            },
+            "unit": {
+              "QUITDATE": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "PER_QUITDATE": {
+                "decimals": 1,
+                "label": "%",
+                "position": "end"
+              }
+            }
+          },
+          "label": "Statistic"
+        },
+        "TLIST(A1)": {
+          "category": {
+            "index": "2024/25",
+            "label": {
+              "2024/25": "2024/25"
+            }
+          },
+          "label": "Financial year"
+        },
+        "HSCT": {
+          "category": {
+            "index": ["BHSCT", "NHSCT", "SEHSCT", "SHSCT", "WHSCT", "N92000002"],
+            "label": {
+              "BHSCT": "Belfast",
+              "NHSCT": "Northern",
+              "SEHSCT": "South Eastern",
+              "SHSCT": "Southern",
+              "WHSCT": "Western",
+              "N92000002": "Northern Ireland"
+            }
+          },
+          "label": "Health and Social Care Trust",
+          "link": {
+            "enclosure": [
+              {
+                "type": "application/geo+json",
+                "href": "https://ws-data.nisra.gov.uk/public/api.static/PxStat.Data.GeoMap_API.Read/c171138ddcb901353718a459d5b2cba3"
+              }
+            ]
+          }
+        },
+        "GENDER": {
+          "category": {
+            "index": ["1", "2"],
+            "label": {
+              "1": "Females",
+              "2": "Males"
+            }
+          },
+          "label": "Gender"
+        }
+      },
+      "statistics": {
+        "QUITDATE": "People setting a quit date",
+        "PER_QUITDATE": "Percentage of people setting a quit date"
+      },
+      "time": "TLIST(A1)",
+      "time_series": "2024/25",
+      "theme": "Health and social care",
+      "theme_code": 6,
+      "subject": "Health behaviours",
+      "subject_code": 142,
+      "product": "Smoking",
+      "product_code": "HBSMK",
+      "rows": 24
+    },
+    "SMKCES05B": {
+      "name": "Smoking cessation - setting a quit date",
+      "updated": "2026-09-17",
+      "categories": {
+        "STATISTIC": {
+          "category": {
+            "index": ["QUITDATE", "PER_QUITDATE"],
+            "label": {
+              "QUITDATE": "People setting a quit date",
+              "PER_QUITDATE": "Percentage of people setting a quit date"
+            },
+            "unit": {
+              "QUITDATE": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "PER_QUITDATE": {
+                "decimals": 1,
+                "label": "%",
+                "position": "end"
+              }
+            }
+          },
+          "label": "Statistic"
+        },
+        "TLIST(A1)": {
+          "category": {
+            "index": "2024/25",
+            "label": {
+              "2024/25": "2024/25"
+            }
+          },
+          "label": "Financial year"
+        },
+        "HSCT": {
+          "category": {
+            "index": ["BHSCT", "NHSCT", "SEHSCT", "SHSCT", "WHSCT", "N92000002"],
+            "label": {
+              "BHSCT": "Belfast",
+              "NHSCT": "Northern",
+              "SEHSCT": "South Eastern",
+              "SHSCT": "Southern",
+              "WHSCT": "Western",
+              "N92000002": "Northern Ireland"
+            }
+          },
+          "label": "Health and Social Care Trust",
+          "link": {
+            "enclosure": [
+              {
+                "type": "application/geo+json",
+                "href": "https://ws-data.nisra.gov.uk/public/api.static/PxStat.Data.GeoMap_API.Read/c171138ddcb901353718a459d5b2cba3"
+              }
+            ]
+          }
+        },
+        "AGE": {
+          "category": {
+            "index": ["1", "2", "3", "4", "5"],
+            "label": {
+              "1": "Age 11-17",
+              "2": "Age 18-34",
+              "3": "Age 35-44",
+              "4": "Age 45-59",
+              "5": "Age 60+"
+            }
+          },
+          "label": "Age band"
+        }
+      },
+      "statistics": {
+        "QUITDATE": "People setting a quit date",
+        "PER_QUITDATE": "Percentage of people setting a quit date"
+      },
+      "time": "TLIST(A1)",
+      "time_series": "2024/25",
+      "theme": "Health and social care",
+      "theme_code": 6,
+      "subject": "Health behaviours",
+      "subject_code": 142,
+      "product": "Smoking",
+      "product_code": "HBSMK",
+      "rows": 60
+    },
+    "SMKCES14": {
+      "name": "Smoking cessation - pregnant women setting a quit date and 4 week follow-up outcome",
+      "updated": "2026-09-17",
+      "categories": {
+        "STATISTIC": {
+          "category": {
+            "index": ["QUITDATE_PREG", "QUIT4W_PREG", "PER_QUIT4_PREG", "NQUIT4_PREG", "PER_NQUIT4_PREG", "NKL_PREG", "PER_NKL_PREG"],
+            "label": {
+              "QUITDATE_PREG": "Pregnant women setting a quit date",
+              "QUIT4W_PREG": "Pregnant women who successfully quit at 4 week follow-up",
+              "PER_QUIT4_PREG": "Percentage of pregnant women who successfully quit at 4 week follow-up",
+              "NQUIT4_PREG": "Pregnant women who did not quit at 4-week follow up",
+              "PER_NQUIT4_PREG": "Percentage of pregnant women who did not quit at 4 week follow-up",
+              "NKL_PREG": "Pregnant women not known/lost to follow-up",
+              "PER_NKL_PREG": "Percentage of pregnant women not known/lost to follow-up"
+            },
+            "unit": {
+              "QUITDATE_PREG": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "QUIT4W_PREG": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "PER_QUIT4_PREG": {
+                "decimals": 1,
+                "label": "%",
+                "position": "end"
+              },
+              "NQUIT4_PREG": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "PER_NQUIT4_PREG": {
+                "decimals": 1,
+                "label": "%",
+                "position": "end"
+              },
+              "NKL_PREG": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "PER_NKL_PREG": {
+                "decimals": 1,
+                "label": "%",
+                "position": "end"
+              }
+            }
+          },
+          "label": "Statistic"
+        },
+        "TLIST(A1)": {
+          "category": {
+            "index": "2024/25",
+            "label": {
+              "2024/25": "2024/25"
+            }
+          },
+          "label": "Financial year"
+        },
+        "HSCT": {
+          "category": {
+            "index": ["BHSCT", "NHSCT", "SEHSCT", "SHSCT", "WHSCT", "N92000002"],
+            "label": {
+              "BHSCT": "Belfast",
+              "NHSCT": "Northern",
+              "SEHSCT": "South Eastern",
+              "SHSCT": "Southern",
+              "WHSCT": "Western",
+              "N92000002": "Northern Ireland"
+            }
+          },
+          "label": "Health and Social Care Trust",
+          "link": {
+            "enclosure": [
+              {
+                "type": "application/geo+json",
+                "href": "https://ws-data.nisra.gov.uk/public/api.static/PxStat.Data.GeoMap_API.Read/c171138ddcb901353718a459d5b2cba3"
+              }
+            ]
+          }
+        }
+      },
+      "statistics": {
+        "QUITDATE_PREG": "Pregnant women setting a quit date",
+        "QUIT4W_PREG": "Pregnant women who successfully quit at 4 week follow-up",
+        "PER_QUIT4_PREG": "Percentage of pregnant women who successfully quit at 4 week follow-up",
+        "NQUIT4_PREG": "Pregnant women who did not quit at 4-week follow up",
+        "PER_NQUIT4_PREG": "Percentage of pregnant women who did not quit at 4 week follow-up",
+        "NKL_PREG": "Pregnant women not known/lost to follow-up",
+        "PER_NKL_PREG": "Percentage of pregnant women not known/lost to follow-up"
+      },
+      "time": "TLIST(A1)",
+      "time_series": "2024/25",
+      "theme": "Health and social care",
+      "theme_code": 6,
+      "subject": "Health behaviours",
+      "subject_code": 142,
+      "product": "Smoking",
+      "product_code": "HBSMK",
+      "rows": 42
+    },
+    "SMKCES23B": {
+      "name": "Smoking cessation - 4 and 52 week follow-ups outcomes",
+      "updated": "2026-09-17",
+      "categories": {
+        "STATISTIC": {
+          "category": {
+            "index": ["QUITDATE", "QUIT4W", "FU52W", "PER_4QUIT52", "PER_4NQUIT52", "PER_4NKL52", "QUIT52W", "PER_QUIT52W"],
+            "label": {
+              "QUITDATE": "People setting a quit date",
+              "QUIT4W": "People who successfully quit at 4 week follow-up",
+              "FU52W": "Followed up at 52 weeks",
+              "PER_4QUIT52": "Percentage of people who quit at 4 weeks still not smoking at 52 weeks",
+              "PER_4NQUIT52": "Percentage of people who quit at 4 weeks that had resumed smoking at 52 weeks",
+              "PER_4NKL52": "Percentage of people who quit at 4 weeks subsequently lost to follow up",
+              "QUIT52W": "People who successfully quit at 52 weeks",
+              "PER_QUIT52W": "Percentage of people who successfully quit at 52 weeks"
+            },
+            "unit": {
+              "QUITDATE": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "QUIT4W": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "FU52W": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "PER_4QUIT52": {
+                "decimals": 1,
+                "label": "%",
+                "position": "end"
+              },
+              "PER_4NQUIT52": {
+                "decimals": 1,
+                "label": "%",
+                "position": "end"
+              },
+              "PER_4NKL52": {
+                "decimals": 1,
+                "label": "%",
+                "position": "end"
+              },
+              "QUIT52W": {
+                "decimals": 0,
+                "label": "Number",
+                "position": "end"
+              },
+              "PER_QUIT52W": {
+                "decimals": 1,
+                "label": "%",
+                "position": "end"
+              }
+            }
+          },
+          "label": "Statistic"
+        },
+        "TLIST(A1)": {
+          "category": {
+            "index": "2023/24",
+            "label": {
+              "2023/24": "2023/24"
+            }
+          },
+          "label": "Financial year"
+        },
+        "HSCT": {
+          "category": {
+            "index": ["BHSCT", "NHSCT", "SEHSCT", "SHSCT", "WHSCT", "N92000002"],
+            "label": {
+              "BHSCT": "Belfast",
+              "NHSCT": "Northern",
+              "SEHSCT": "South Eastern",
+              "SHSCT": "Southern",
+              "WHSCT": "Western",
+              "N92000002": "Northern Ireland"
+            }
+          },
+          "label": "Health and Social Care Trust",
+          "link": {
+            "enclosure": [
+              {
+                "type": "application/geo+json",
+                "href": "https://ws-data.nisra.gov.uk/public/api.static/PxStat.Data.GeoMap_API.Read/c171138ddcb901353718a459d5b2cba3"
+              }
+            ]
+          }
+        }
+      },
+      "statistics": {
+        "QUITDATE": "People setting a quit date",
+        "QUIT4W": "People who successfully quit at 4 week follow-up",
+        "FU52W": "Followed up at 52 weeks",
+        "PER_4QUIT52": "Percentage of people who quit at 4 weeks still not smoking at 52 weeks",
+        "PER_4NQUIT52": "Percentage of people who quit at 4 weeks that had resumed smoking at 52 weeks",
+        "PER_4NKL52": "Percentage of people who quit at 4 weeks subsequently lost to follow up",
+        "QUIT52W": "People who successfully quit at 52 weeks",
+        "PER_QUIT52W": "Percentage of people who successfully quit at 52 weeks"
+      },
+      "time": "TLIST(A1)",
+      "time_series": "2023/24",
+      "theme": "Health and social care",
+      "theme_code": 6,
+      "subject": "Health behaviours",
+      "subject_code": 142,
+      "product": "Smoking",
+      "product_code": "HBSMK",
+      "rows": 48
     },
     "SMOKEPREGDEA": {
       "name": "Smoking during pregnancy",
