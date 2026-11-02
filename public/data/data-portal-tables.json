@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-10-30T20:27:27.611Z",
+  "last_run": "2026-11-02T19:13:42.531Z",
   "table_count": 1261,
   "tables": {
     "ABI01": {
@@ -122724,7 +122724,7 @@
     },
     "MYE01T02": {
       "name": "Mid-year population estimates",
-      "updated": "2026-10-02",
+      "updated": "2026-11-02",
       "categories": {
         "STATISTIC": {
           "category": {
