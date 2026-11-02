@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-10-30T20:27:44.758Z",
+  "last_run": "2026-11-02T19:14:36.777Z",
   "table_count": 508,
   "tables": {
     "ACILWHSCT": {
@@ -41232,7 +41232,7 @@
     },
     "MYE01T02": {
       "name": "Mid-year population estimates",
-      "updated": "2026-10-02",
+      "updated": "2026-11-02",
       "categories": {
         "STATISTIC": {
           "category": {
