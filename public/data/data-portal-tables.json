@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-11-02T19:13:42.531Z",
+  "last_run": "2026-11-03T16:51:22.605Z",
   "table_count": 1261,
   "tables": {
     "ABI01": {
@@ -36416,7 +36416,7 @@
     },
     "DESCEQ": {
       "name": "Primary, post primary and special schools",
-      "updated": "2026-02-18",
+      "updated": "2026-11-03",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -42910,7 +42910,7 @@
     },
     "DSIFEQ": {
       "name": "Advanced digital skills - internet functions",
-      "updated": "2026-04-15",
+      "updated": "2026-11-03",
       "categories": {
         "STATISTIC": {
           "category": {
@@ -170685,7 +170685,7 @@
     },
     "SKILLSEQ": {
       "name": "Level 2 qualifications",
-      "updated": "2026-03-03",
+      "updated": "2026-11-03",
       "categories": {
         "STATISTIC": {
           "category": {
