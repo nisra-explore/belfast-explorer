@@ -1,4 +1,4 @@
-import { palette, GEOG_PROPS } from "../config/config.js";
+import { palette, GEOG_PROPS, lgd_code, lgd_name } from "../config/config.js";
 import { loadShapes } from "./loadShapes.js";
 import { titleCase } from "./titleCase.js";
 import { getColour } from "./getColour.js";
@@ -52,11 +52,32 @@ export async function plotMap (tables, geog_type) {
     const unit = result.dimension.STATISTIC.category.unit[statistic].label;
 
     let plot_ni = false;
+    let lgd_matrix;
+
+    let ward_type = null;
+    if (["Ward2014", "WARD2014"].includes(geog_type)) ward_type = geog_type;
 
     if (geog_type == "none") {
         plot_ni = true;
+    } else if (geog_type == "DEA2014") {
+    if (matrix.indexOf("DEA") > -1) {
+        lgd_matrix = matrix.replace("DEA", "LGD");
+        if (Object.keys(tables).includes(lgd_matrix)) {
+            plot_ni = true;
+        }
+    } else if (matrix == "MYE01T010") {
+        lgd_matrix = "MYE01T04";
+        plot_ni = true;
+    }
+    } else if (ward_type) {
+        if (matrix.indexOf("WARD") > -1) {
+            lgd_matrix = matrix.replace("WARD", "LGD");
+            if (Object.keys(tables).includes(lgd_matrix)) {
+                plot_ni = true;
+            }
+        }
     } else {
-        if (result.dimension[geog_type].category.index.includes("N92000002") || themes_menu.value == "67") {
+        if (result.dimension[geog_type].category.index.includes(lgd_code) || themes_menu.value == "67" || geog_type == "HSCT") {
             plot_ni = true;
         }
     }    
@@ -73,24 +94,23 @@ export async function plotMap (tables, geog_type) {
         niHeadline.classList.add("d-none");
     }
 
+    headline_stat_label.innerHTML = `
+        ${stat_label}
+        <img class="i-button" src="assets/img/icon/info-circle.svg" alt="Information button"
+            data-bs-toggle="collapse" data-bs-target="#stat-info" aria-expanded="false"
+            aria-controls="stat-info">
+    `;
 
-        headline_stat_label.innerHTML = `
-            ${stat_label}
-            <img class="i-button" src="assets/img/icon/info-circle.svg" alt="Information button"
-                data-bs-toggle="collapse" data-bs-target="#stat-info" aria-expanded="false"
-                aria-controls="stat-info">
-        `;
+    stat_info_text.innerHTML = `
+        <div>Access data at: <a href="https://data.nisra.gov.uk/table/${matrix}" target="_blank">${result.label}</a></div>
+        <div>Last updated: <strong>${result.updated.substr(8, 2)}/${result.updated.substr(5, 2)}/${result.updated.substr(0, 4)}</strong></div>
+        <div><a href="mailto:${result.extension.contact.email}">Email for more information</a></div>
+    `;
 
-        stat_info_text.innerHTML = `
-            <div>Access data at: <a href="https://data.nisra.gov.uk/table/${matrix}" target="_blank">${result.label}</a></div>
-            <div>Last updated: <strong>${result.updated.substr(8, 2)}/${result.updated.substr(5, 2)}/${result.updated.substr(0, 4)}</strong></div>
-            <div><a href="mailto:${result.extension.contact.email}">Email for more information</a></div>
-        `;
-
-        const chartData = await buildCharts(tables, matrix, statistic, geog_type, result, plot_ni, time_var, subtitle_text, other_headline, other_selections, id_vars, stat_label, unit);
-        await buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit);
-        const data_series = chartData?.data_series ?? [];
-        const time_series = chartData?.time_series ?? [];
+    const chartData = await buildCharts(tables, matrix, statistic, geog_type, result, plot_ni, time_var, subtitle_text, other_headline, other_selections, id_vars, stat_label, unit, lgd_matrix, ward_type);
+    await buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit, ward_type);
+    const data_series = chartData?.data_series ?? [];
+    const time_series = chartData?.time_series ?? [];
 
     if (!plot_ni) {
         
@@ -109,6 +129,7 @@ export async function plotMap (tables, geog_type) {
     }
 
     let data;
+    const geojsonData = await loadShapes(geog_type);
 
     if (!["none", "NI"].includes(geog_type)) {
 
@@ -126,6 +147,26 @@ export async function plotMap (tables, geog_type) {
             result.value.splice(u_position, 1);
             result.dimension[geog_type].category.index.splice(u_position, 1);
             delete result.dimension[geog_type].category.label["Unknown"];
+        }
+
+        if (geog_type == "DEA2014") {
+            const DEA_codes = geojsonData
+                .features
+                .filter(f => f.properties.LGDCode == lgd_code)
+                .map(f => f.properties.DEA_code);
+            const DEA_positions = DEA_codes.map(code => result.dimension[geog_type].category.index.indexOf(code)).filter(pos => pos >= 0);
+            result.value = result.value.filter((v, i) => DEA_positions.includes(i));
+            result.dimension[geog_type].category.index = result.dimension[geog_type].category.index.filter((v, i) => DEA_positions.includes(i));
+        }
+
+        if (["Ward2014", "WARD2014"].includes(geog_type)) {
+            const Ward_codes = geojsonData
+                .features
+                .filter(f => f.properties.LGD_Code == lgd_code)
+                .map(f => f.properties.Ward_Code);
+            const Ward_positions = Ward_codes.map(code => result.dimension[geog_type].category.index.indexOf(code)).filter(pos => pos >= 0);
+            result.value = result.value.filter((v, i) => Ward_positions.includes(i));
+            result.dimension[geog_type].category.index = result.dimension[geog_type].category.index.filter((v, i) => Ward_positions.includes(i));
         }
 
         const cleaned = result.value.map(v =>
@@ -255,23 +296,24 @@ export async function plotMap (tables, geog_type) {
         
         
 
-        let initialZoom = window.innerWidth < 768 ? 6 : 7; 
-        let bounds = [[-12.0, 52.0], [-2.0, 56.5]];
+        let initialZoom = window.innerWidth < 768 ? 9 : 10; 
 
         if (geog_type == "COB_BASIC") {
             initialZoom = 1;
             bounds = null;
         }
 
+        const bb = await getLGDBoundsAndCenter(lgd_code);
+
         // Create a map
        map = new maplibregl.Map({
             container: 'map',
             style: 'public/map/style-omt.json',
-            center: [-6.85, 54.67],
+            center: bb.center,
             zoom: initialZoom,
-            minZoom: initialZoom - 7,
+            minZoom: initialZoom - 6,
             maxZoom: initialZoom + 7,
-            maxBounds: bounds,
+            maxBounds: bb.bounds,
             attributionControl: false,
             dragRotate: false,
             preserveDrawingBuffer: true,
@@ -291,7 +333,7 @@ export async function plotMap (tables, geog_type) {
         'top-right'           // positions: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
         );
             
-        const geojsonData = await loadShapes(geog_type);
+        
 
 
         map.on('load', async () => {
@@ -303,7 +345,23 @@ export async function plotMap (tables, geog_type) {
             // Assumes these are already in scope: geojsonData, geog_type, result, year, unit,
             // data (array of values), colours (0..1 or bins), getColour(), GEOG_PROPS, titleCase()
 
-            const features = geojsonData.features.map((f, idx) => {
+             const features = geojsonData.features
+                // 1) If DEA2014, only keep features in the chosen LGD
+                .filter(f => {
+                    if (!["DEA2014", ward_type].includes(geog_type)) return true;
+
+                    const LGD_property = geog_type === "DEA2014" ? "LGDCode" : "LGD_Code"
+
+                    const fLgd = String(f.properties[LGD_property] ?? "")
+                    .replace(/\s+/g, "")
+                    .toUpperCase();
+
+                    const wanted = String(lgd_code ?? "")
+                    .replace(/\s+/g, "")
+                    .toUpperCase();
+
+                    return fLgd === wanted;
+                }).map((f, idx) => {
                 // Match your Leaflet logic to find this feature’s index in the data array
                 const codeProp = GEOG_PROPS[geog_type].code_var;
                 const code = String(f.properties[codeProp]).replace(/\s+/g, "");
@@ -478,7 +536,7 @@ export async function plotMap (tables, geog_type) {
 
         let chart_query = {
             "STATISTIC": statistic,
-            [geog_type]: "N92000002",
+            [geog_type]: lgd_code,
             [time_var]: time_series
         };
 
@@ -510,4 +568,50 @@ export async function plotMap (tables, geog_type) {
             updated_text
         );
 
+        const lgd_names = document.getElementsByClassName("lgd-name");
+        for (let i = 0; i < lgd_names.length; i++) {
+            lgd_names[i].textContent = lgd_name;
+        }
+
+}
+
+async function getLGDBoundsAndCenter(lgd_code) {
+  const res = await fetch("public/map/LGD2014.geo.json");
+  const lgdGeo = await res.json();
+
+  const wanted = String(lgd_code).replace(/\s+/g, "").toUpperCase();
+
+  const feature = lgdGeo.features.find(f => {
+    const fCode = String(f.properties.LGDCode ?? "")
+      .replace(/\s+/g, "")
+      .toUpperCase();
+    return fCode === wanted;
+  });
+
+  if (!feature) {
+    console.warn("No LGD feature found for code:", lgd_code);
+    return null;
+  }
+
+  // Walk all coordinates (works for Polygon/MultiPolygon)
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+  const walk = coords => {
+    if (typeof coords[0] === "number") {
+      const [x, y] = coords;
+      if (x < minX) minX = x - 0.5;
+      if (y < minY) minY = y;
+      if (x > maxX) maxX = x + 0.5;
+      if (y > maxY) maxY = y;
+      return;
+    }
+    coords.forEach(walk);
+  };
+
+  walk(feature.geometry.coordinates);
+
+  const bounds = [[minX, minY], [maxX, maxY]];
+  const center = [(minX + maxX) / 2, (minY + maxY) / 2];
+
+  return { bounds, center };
 }

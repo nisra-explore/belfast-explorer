@@ -1,25 +1,31 @@
 // Metadata json file name. If forking do not use "data-portal-tables"
-export const meta_name = "data-portal-tables";
+export const meta_name = "belfast-tables";
 
 // Default data to show on page load
-export const default_table = "MYE01T04";
+export const default_table = "MYE01T010";
+
+export const lgd_code = "N09000003"; // Belfast
+export const lgd_name = "Belfast";
+
+export const hsct_code = "BHSCT";
+const hsct_name = "Belfast";
 
 // Lookup for geojson files
 export const GEOG_PROPS= {
   LGD2014: { 
     url: "public/map/LGD2014.geo.json",
     code_var: "LGDCode",
-    label: "Local Government District"
+    label: lgd_name
   },
   LGD: { 
     url: "public/map/LGD2014.geo.json",
     code_var: "LGDCode" ,
-    label: "Local Government District"
+    label: lgd_name
   },
   LGD1992: {
     url: "public/map/LGD1992.geo.json",
     code_var: "LGD_CODE",
-    label: "Local Government District (1992)"
+    label: `${lgd_name} 1992`
   },
   AA: { 
     url: "public/map/AA.geo.json",
@@ -34,10 +40,10 @@ export const GEOG_PROPS= {
   HSCT:    { 
     url: "public/map/HSCT.geo.json",
     code_var: "TrustCode",
-    label: "Health and Social Care Trust"
+    label: `${hsct_name} Health and Social Care Trust`
   },
   DEA2014: { 
-    url: "public/map/DEA2014.geo.json", 
+    url: "public/map/DEA2014_with_LGD.geo.json",
     code_var: "DEA_code",
     label: "District Electoral Area" 
   },

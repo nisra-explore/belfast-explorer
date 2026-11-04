@@ -170,6 +170,12 @@ for (i in seq_along(data_portal$label)) {
     )
   ) next
 
+  if (!any(
+    c(
+      "LGD2014", "LGD", "DEA2014", "Ward2014", "WARD2014", "HSCT"
+    ) %in% names(json_data$dimension)
+  )) next
+
   tables$tables[[matrix]] <- list(
     name = name,
     updated = as.Date(substr(data_portal$updated[i], 1, 10)),
@@ -205,6 +211,12 @@ for (i in seq_along(data_portal$label)) {
         )
       ) next
 
+      if (!any(
+        c(
+          "LGD2014", "LGD", "DEA2014", "Ward2014", "WARD2014", "HSCT"
+        ) %in% names(json_data$dimension)
+      )) next
+
       tables$tables[[paste0(matrix, "_", j)]] <- list(
         name = name,
         updated = as.Date(substr(data_portal$updated[i], 1, 10)),
@@ -228,6 +240,7 @@ for (i in seq_along(data_portal$label)) {
 }
 
 tables$tables <- tables$tables[order(names(tables$tables))]
+tables$table_count <- length(tables$tables)
 
 write_json(tables,
            paste0("public/data/", meta_name, ".json"),

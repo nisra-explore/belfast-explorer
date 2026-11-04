@@ -6,8 +6,11 @@ import { sharePage } from "./utils/sharePage.js";
 import { initCookieConsent } from "./utils/cookies.js";
 import { refreshRoute } from "./utils/refreshRoute.js";
 import "./utils/skipToMainContent.js";
+import { updateTitle } from "./utils/updateTitles.js";
 
 let searchIndex = [];
+
+updateTitle();
 
 window.addEventListener("DOMContentLoaded", async () => {
   try {

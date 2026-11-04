@@ -2,8 +2,9 @@ import { additional_tables, table_tabs, table_tabs_content, tables_title,
          stats_menu, chart_title } from "./elements.js";
 
 import { ni_result } from "./buildCharts.js";
+import { lgd_name, lgd_code, hsct_code } from "../config/config.js";
 
-export async function buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit) {
+export async function buildTables(tables, matrix, statistic, geog_type, year, time_var, other_vars, other_selections, id_vars, unit, ward_type) {
 
     // Build a table for each additional variable and place behind a tab
     if (other_vars.length > 0) {
@@ -11,7 +12,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
         additional_tables.classList.remove("d-none");
 
          // Add new tables
-         tables_title.textContent = `${tables[matrix].statistics[stats_menu.value]} in Northern Ireland (${year}) by:`;
+         tables_title.textContent = `${tables[matrix].statistics[stats_menu.value]} in ${lgd_name} (${year}) by:`;
 
         for (let i = 0; i < other_vars.length; i ++) {   
 
@@ -40,15 +41,39 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
             let table_selections = other_selections.split(",");
             table_selections = table_selections.filter(x => x.indexOf(other_vars[i]) == -1)
             table_selections = table_selections.join(",");
-            if (geog_type != "none") table_selections += `,"${geog_type}":{"category":{"index":["N92000002"]}}`;
+            let table_geog_type = geog_type;
+            let table_matrix = matrix;
+            let table_id_vars = id_vars;
+            if (geog_type == "DEA2014") {
+                if (matrix.indexOf("DEA") > -1) {
+                    table_geog_type = "LGD2014";
+                    table_matrix = matrix.replace("DEA", "LGD");
+                    table_id_vars = table_id_vars.replace("DEA2014", "LGD2014");
+                } else if (matrix == "MYE01T010") {
+                    table_geog_type = "LGD2014";
+                    table_matrix = "MYE01T04";
+                    table_id_vars = table_id_vars.replace("DEA2014", "LGD2014");
+                }
+            }
+
+            if (ward_type) {
+                if (matrix.indexOf("WARD") > -1) {
+                    table_geog_type = "LGD2014";
+                    table_matrix = matrix.replace("WARD", "LGD");
+                    table_id_vars = table_id_vars.replace(ward_type, "LGD2014");
+                }
+            }
+
+            if (["LGD2014", "LGD"].includes(table_geog_type)) table_selections += `,"${table_geog_type}":{"category":{"index":["${lgd_code}"]}}`;
+            if (["HSCT"].includes(table_geog_type)) table_selections += `,"${table_geog_type}":{"category":{"index":["${hsct_code}"]}}`;
 
             let table_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
                 encodeURIComponent('{"jsonrpc":"2.0","method":"PxStat.Data.Cube_API.ReadDataset","params":{"class":"query","id":' +
-                    id_vars + ',"dimension":{"STATISTIC":{"category":{"index":["' +
+                    table_id_vars + ',"dimension":{"STATISTIC":{"category":{"index":["' +
                     statistic + '"]}},"' + time_var + '":{"category":{"index":["' + year +
                     '"]}}' + table_selections +
                     '},"extension":{"pivot":null,"codes":false,"language":{"code":"en"},"format":{"type":"JSON-stat","version":"2.0"},"matrix":"' +
-                    matrix + '"},"version":"2.0"}}');
+                    table_matrix + '"},"version":"2.0"}}');
 
             const response = await fetch(table_url);
             const { result } = await response.json();
@@ -126,16 +151,10 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
                         maximumFractionDigits: decimals
                     });
                 }
-
-                td_1.style = "text-align: right;";
-
-                if (
-                    ["ALL", "NI", "N92000002"].includes(
-                        row.code.toUpperCase()
-                    )
-                ) {
-                    td_0.style = "font-weight: bold;";
-                    td_1.style = "text-align: right; font-weight: bold;";
+                td_1.style = "text-align: right;"
+                if (["all", "ni", lgd_code.toLowerCase()].includes(row.code.toLowerCase())) {
+                    td_0.style = "font-weight: bold;"
+                    td_1.style = "text-align: right; font-weight: bold;"
                 }
 
                 tr.appendChild(td_1);
@@ -157,7 +176,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
 
             additional_tables.classList.remove("d-none");
 
-            tables_title.textContent = `${tables[matrix].name} - Northern Ireland Summary (${year})`;
+            tables_title.textContent = `${tables[matrix].name} - ${lgd_name} Summary (${year})`;
 
             let div = document.createElement("div");
             div.classList.add("tab-pane");
@@ -168,9 +187,13 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
             div.id = `table-tab-statistic`;
 
             let table_selections = "";
-            if (geog_type != "none") table_selections += `,"${geog_type}":{"category":{"index":["N92000002"]}}`;
-
-            
+            if (geog_type != "none") {
+                if (geog_type == "HSCT") {
+                    table_selections += `,"${geog_type}":{"category":{"index":["${hsct_code}"]}}`;
+                } else {
+                    table_selections += `,"${geog_type}":{"category":{"index":["${lgd_code}"]}}`;
+                }
+            }
 
             let table_url = 'https://ws-data.nisra.gov.uk/public/api.jsonrpc?data=' +
                 encodeURIComponent('{"jsonrpc":"2.0","method":"PxStat.Data.Cube_API.ReadDataset","params":{"class":"query","id":["' +
@@ -200,7 +223,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
 
 
             let stat_header = document.createElement("th");
-            stat_header.textContent = `Northern Ireland`;
+            stat_header.textContent = lgd_name;
             stat_header.style = "text-align: right;"
             tr.appendChild(stat_header);
 
@@ -230,7 +253,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
                     });
                 }
                 td_1.style = "text-align: right;"
-                if (["all", "ni", "n92000002"].includes(Object.keys(result.dimension.STATISTIC.category.label)[j].toLowerCase())) {
+                if (["all", "ni", lgd_code.toLowerCase()].includes(Object.keys(result.dimension.STATISTIC.category.label)[j].toLowerCase())) {
                     td_0.style = "font-weight: bold;"
                     td_1.style = "text-align: right; font-weight: bold;"
                 }
@@ -267,7 +290,7 @@ export async function buildTables(tables, matrix, statistic, geog_type, year, ti
             tr.appendChild(var_header);
 
             let stat_header = document.createElement("th");
-            stat_header.textContent = `Northern Ireland (${yAxisTitle})`;
+            stat_header.textContent = `${lgd_name} (${yAxisTitle})`;
             stat_header.style = "text-align: right;"
             tr.appendChild(stat_header);
 
